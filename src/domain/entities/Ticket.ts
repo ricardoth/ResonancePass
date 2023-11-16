@@ -1,3 +1,6 @@
+import { MedioPago } from "./MedioPago";
+import { Usuario } from "./Usuario";
+
 export interface Ticket {
     IdTicket: number;
     IdUsuario: number;
@@ -10,4 +13,6 @@ export interface Ticket {
     Activo: boolean;
     FechaCreacion: string;
     FechaModified: string;
+    Usuario: Usuario;
+    MedioPago: MedioPago;
 }
