@@ -5,5 +5,5 @@ export interface Comuna {
     IdRegion: number;
     NombreComuna: string;
     Activo: boolean;
-    Region: Region;
+    Region?: Region;
 }

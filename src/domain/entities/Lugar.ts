@@ -8,5 +8,5 @@ export interface Lugar {
     Numeracion: string;
     FechaCreacion: string;
     Activo: boolean;
-    Comuna: Comuna;
+    Comuna?: Comuna;
 }

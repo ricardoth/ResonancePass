@@ -13,5 +13,5 @@ export interface Usuario {
     Correo: string;
     Activo: boolean;
     FechaCreacion: string;
-    TipoUsuario: TipoUsuario;
+    TipoUsuario?: TipoUsuario;
 }

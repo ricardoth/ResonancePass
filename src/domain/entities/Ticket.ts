@@ -1,4 +1,6 @@
+import { Evento } from "./Evento";
 import { MedioPago } from "./MedioPago";
+import { Sector } from "./Sector";
 import { Usuario } from "./Usuario";
 
 export interface Ticket {
@@ -13,6 +15,8 @@ export interface Ticket {
     Activo: boolean;
     FechaCreacion: string;
     FechaModified: string;
-    Usuario: Usuario;
-    MedioPago: MedioPago;
+    Usuario?: Usuario;
+    MedioPago?: MedioPago;
+    Evento?: Evento;
+    Sector?: Sector;
 }
