@@ -1,6 +1,18 @@
+import { ReactNode } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
-export const PrivateRoute = () => {
-  return (
-    <div>PrivateRoute</div>
-  )
+interface PrivateRouteProps {
+    children: ReactNode;
+}
+
+export const PrivateRoute: React.FC<PrivateRouteProps> = ({children}) => {
+    const { userState, dispatch } = useAuth();
+    const { pathname, search } = useLocation();
+
+    localStorage.setItem('lastPath', pathname + search);
+
+    return userState.logged
+        ? children
+        : <Navigate to="/login" />
 }

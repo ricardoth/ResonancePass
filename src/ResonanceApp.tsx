@@ -1,8 +1,10 @@
+import { AppRouter } from "./presentation/routes/AppRouter";
+
 function ResonanceApp() {
 
     return (
         <>
-            <h1>HOLA</h1>
+            <AppRouter />
         </>
     )
 }
