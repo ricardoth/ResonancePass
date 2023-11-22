@@ -7,7 +7,6 @@ export const HomeRoutes = () => {
     return (
         <>
             <Navbar />
-
             <CarouselEvent />
 
             <div>

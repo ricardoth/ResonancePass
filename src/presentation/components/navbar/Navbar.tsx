@@ -1,4 +1,5 @@
 // import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import resonanceImg from '../../../assets/images/resonancePassBGWhite.png';
 import { Searchbar } from '../searchBar/Searchbar';
 import './Navbar.css';
@@ -9,12 +10,9 @@ export const Navbar = () => {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">
-                        {/* <Link as to={"/"}>
-                           
-                        </Link> */}
-                      <img src={resonanceImg} width={100} alt="Logo" />
-                    </a>
+                    <Link className="navbar-brand" to={"/"}>
+                        <img src={resonanceImg} width={100} alt="Logo" />
+                    </Link> 
 
                     <div className="d-none d-lg-flex ms-auto">
                         <Searchbar />

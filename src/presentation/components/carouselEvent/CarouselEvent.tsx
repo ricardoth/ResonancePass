@@ -1,13 +1,21 @@
-//import { enviroment } from '../../../enviroment/enviroment.dev';
 import { useEffect, useState } from 'react';
+import { Buffer } from 'buffer';
+import { environment } from '../../../environment/environment.dev';
+import { basicAuth } from '../../../types/basicAuth';
+import { Loader } from '../loader/Loader';
+import { formatDateHour } from '../../../utils/formatDateOption';
 import axios from 'axios';
 import './CarouselEvent.css';
+import { useNavigate } from 'react-router-dom';
 
-//const URL_GET_EVENTOS = enviroment.UrlEventos;
-const URL_RICKS_MORTYS = "https://rickandmortyapi.com/api/character";
+const URL_GET_EVENTOS = environment.UrlEventos;
+const userBasicAuth = basicAuth.username;
+const passBasicAuth = basicAuth.password;
 
 export const CarouselEvent = () => {
     const [ eventos, setEventos ] = useState([]);
+    const navigate = useNavigate();
+    const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
         fetchEventos();
@@ -15,88 +23,83 @@ export const CarouselEvent = () => {
     
     const fetchEventos = async () => {
         try {
-            let { data } = await axios.get(URL_RICKS_MORTYS);
-            setEventos(data.results);
+            setLoading(true);
+            let {data} = await axios.get(URL_GET_EVENTOS, {
+                headers: {
+                    Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
+                }
+            });
+            let datos = data.data;
+            setEventos(datos);
+            setLoading(false);
         } catch (error) {
             console.log(error)
+            setLoading(false);
         }
+    }
+
+    const handleNavigateEvent = (rowParam: any) => {
+        navigate('/eventScreen', {
+            state: { rowParam }
+        })
     }
 
     return (
         <>
             <div id="carouselExampleCaptions" className="carousel slide">
-                    <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-
-                    </div>
+                <div className="carousel-indicators">
+                {
+                    eventos.map( (row: any, index: any) => {
+                        return (
+                            <button type="button" key={index} data-bs-target="#carouselExampleCaptions" data-bs-slide-to={index} className="active" aria-current="true"  aria-label= {`Slide ${index}`}></button>
+                        )
+                    })
+                }
+                </div>
 
                     <div className="carousel-inner">
                     {
+                        loading ? <Loader /> :
                         eventos.map( (row: any) => {
-                            return (
-                                <div key={row.id} className="carousel-item active">
-                                    <img src={row.image} className="d-block w-100" alt="..." />
-                                    <div className="carousel-caption d-none d-md-block">
-                                        <h5>First slide label</h5>
-                                        <p>Some representative placeholder content for the first slide.</p>
+                            if(row.idEvento === 1) {
+                                return (
+                                    <div key={row.idEvento} className="carousel-item active">
+                                        <img src={`data:image/jpeg;base64, ${row.contenidoFlyer}`} className="d-block w-100" alt="..." />
+                                        <div className="carousel-caption d-none d-md-block">
+                                            <h5 className='texto-border'>{row.nombreEvento}</h5>
+                                            <p className='texto-border'>Fecha: {formatDateHour(row.fecha)}</p>
+                                            <p className='texto-border'>Lugar: {row.lugar.nombreLugar}</p>
+                                            <button key={row.idEvento} onClick={() => handleNavigateEvent(row)} className='btn btn-outline-light btn-lg'>Ver Más</button> 
+                                        </div> 
                                     </div>
-                                </div>
-                            )
+                                )
+                            } else {
+                                return (
+                                    <div key={row.idEvento} className="carousel-item">
+                                        <img src={`data:image/jpeg;base64, ${row.contenidoFlyer}`} className="d-block w-100" alt="..." />
+                                        <div className="carousel-caption d-none d-md-block">
+                                            <h5 className='texto-border'>{row.nombreEvento}</h5>
+                                            <p className='texto-border'>Fecha: {formatDateHour(row.fecha)}</p>
+                                            <p className='texto-border'>Lugar: {row.lugar.nombreLugar}</p>
+                                            <button key={row.idEvento} onClick={() => handleNavigateEvent(row)} className='btn btn-outline-light btn-lg'>Ver Más</button>
+                                        </div> 
+                                    </div>
+                                )
+                            }
+                            
                         })
-                        
-                        
                     }
                     </div>
 
+                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                    </button>
             </div>
-           
-
-            {/* <div id="carouselExampleCaptions" className="carousel slide">
-                <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-
-                </div>
-
-                <div className="carousel-inner">
-                     */}
-
-                    {/* <div className="carousel-item active">
-                        <img src="https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg" className="d-block w-100" alt="..." />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
-                        </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://ethic.es/wp-content/uploads/2023/03/imagen.jpg" className="d-block w-100" alt="..." />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://d7lju56vlbdri.cloudfront.net/var/ezwebin_site/storage/images/_aliases/img_1col/noticias/el-webb-capta-una-imagen-infrarroja-muy-detallada-de-estrellas-en-formacion-activa/11037078-1-esl-MX/El-Webb-capta-una-imagen-infrarroja-muy-detallada-de-estrellas-en-formacion-activa.jpg" className="d-block w-100" alt="..." />
-                        <div className="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div> */}
-                {/* </div>
-
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-
-            </div> */}
         </>
     )
 }

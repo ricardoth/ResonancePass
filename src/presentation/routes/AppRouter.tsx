@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { PublicRoute } from "./PublicRoute"
 import { LoginScreen } from "../pages/login/LoginScreen"
 import { HomeRoutes } from "./HomeRoutes"
+import { EventScreen } from "../pages/event/EventScreen"
 
 export const AppRouter = () => {
     return (
@@ -21,6 +22,16 @@ export const AppRouter = () => {
                     element={
                         <PublicRoute>
                             <HomeRoutes />
+                        </PublicRoute>
+                    }
+                />
+
+
+                <Route 
+                    path="/eventScreen"
+                    element={
+                        <PublicRoute>
+                            <EventScreen />
                         </PublicRoute>
                     }
                 />
