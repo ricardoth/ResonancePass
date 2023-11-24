@@ -1,0 +1,8 @@
+.center-info-event {
+    background-color: #262721;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 75px;
+    padding-bottom: 75px;
+}

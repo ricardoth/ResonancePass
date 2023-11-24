@@ -19,5 +19,21 @@ const opciones: object = { year: 'numeric', month: 'long', day: '2-digit' };
 export const formatDateLocaleString = (paramDate: string) => {
     let fecha = new Date(paramDate);
     const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones).replace(/\//g, '-');
-    return fechaFormateada;
+    return fechaFormateada.toLocaleUpperCase();
+}
+
+
+export const getYearNow = () => {
+    let fecha = new Date();
+    return fecha.getFullYear();
+}
+
+export const getHourEvent = (paramDate: string) => {
+    const separator = paramDate.split('T');
+    
+    const hourDate = separator[1].split(':');
+    const hour = hourDate[0];
+    const minutesDate = hourDate[1];
+    const hourString = `${hour}:${minutesDate}`
+    return hourString;
 }

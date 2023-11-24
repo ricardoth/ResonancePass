@@ -1,5 +1,5 @@
 export interface TipoUsuario {
-    IdTipoUsuario: number;
-    NombreTipoUsuario: string;
-    Activo: boolean;
+    idTipoUsuario: number;
+    nombreTipoUsuario: string;
+    activo: boolean;
 }

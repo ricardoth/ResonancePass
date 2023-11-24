@@ -1,7 +1,7 @@
 export interface AccesoEvento {
-    IdAccesoEvento: number;
-    IdTicket: number;
-    IdEstadoTicket: number;
-    FechaHoraEntrada?: string;
-    FechaHoraSalida?: string;
+    idAccesoEvento: number;
+    idTicket: number;
+    idEstadoTicket: number;
+    fechaHoraEntrada?: string;
+    fechaHoraSalida?: string;
 }

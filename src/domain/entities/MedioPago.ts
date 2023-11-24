@@ -1,6 +1,6 @@
 export interface MedioPago {
-    IdMedioPago: number;
-    NombreMedioPago: string;
-    Descripcion: string;
-    Activo: boolean;
+    idMedioPago: number;
+    nombreMedioPago: string;
+    descripcion: string;
+    activo: boolean;
 }

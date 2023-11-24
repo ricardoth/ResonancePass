@@ -1,0 +1,7 @@
+.referencial-container {
+    background-color: #262721;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}

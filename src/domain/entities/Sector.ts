@@ -8,6 +8,9 @@ export interface Sector {
     capacidadActual: number;
     capacidadTotal: number;
     precio: number;
+    cargo: number;
+    total: number;
+    colorHexa: string;
     activo: boolean;
-    evento?: Evento;
+    evento: Evento | null;
 }

@@ -1,12 +1,13 @@
 import { Comuna } from "./Comuna";
 
 export interface Lugar {
-    IdLugar: number;
-    IdComuna: number;
-    NombreLugar: string;
-    Ubicacion: string;
-    Numeracion: string;
-    FechaCreacion: string;
-    Activo: boolean;
-    Comuna?: Comuna;
+    idLugar: number;
+    idComuna: number;
+    nombreLugar: string;
+    ubicacion: string;
+    numeracion: string;
+    fechaCreacion: string;
+    mapaReferencial: string;
+    activo: boolean;
+    comuna: Comuna | null;
 }

@@ -1,7 +1,7 @@
 export interface Region {
-    IdRegion: number;
-    NumeroRegion: number;
-    Abreviatura: string;
-    NombreRegion: string;
-    Activo: boolean;
+    idRegion: number;
+    numeroRegion: number;
+    abreviatura: string;
+    nombreRegion: string;
+    activo: boolean;
 }

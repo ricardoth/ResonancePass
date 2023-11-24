@@ -1,11 +1,11 @@
 import { Ticket } from "./Ticket";
 
 export interface TicketQR {
-    IdTicketQR: number;
-    IdTicket: number;
-    Contenido: string;
-    NombreTicketComprobante: string;
-    Activo: boolean;
-    FechaCreacion: string;
-    Ticket?: Ticket;
+    idTicketQR: number;
+    idTicket: number;
+    contenido: string;
+    nombreTicketComprobante: string;
+    activo: boolean;
+    fechaCreacion: string;
+    ticket: Ticket | null;
 }

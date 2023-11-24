@@ -1,6 +1,13 @@
 .info-evento {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding-top: 25%;
+    align-items: center; 
+    padding-top: 25%; 
+}
+
+.img-container {
+    box-shadow: 15px 15px 125px 15px rgba(0,0,0,0.74) inset;
+    -webkit-box-shadow: 15px 15px 125px 35px rgba(0,0,0,0.74) inset;
+    -moz-box-shadow: 15px 15px 35px 35px rgba(0,0,0,0.74) inset;
 }

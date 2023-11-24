@@ -4,19 +4,19 @@ import { Sector } from "./Sector";
 import { Usuario } from "./Usuario";
 
 export interface Ticket {
-    IdTicket: number;
-    IdUsuario: number;
-    IdEvento: number;
-    IdSector: number;
-    IdMedioPago: number;
-    MontoPago: number;
-    MontoTotal: number;
-    FechaTicket: string;
-    Activo: boolean;
-    FechaCreacion: string;
-    FechaModified: string;
-    Usuario?: Usuario;
-    MedioPago?: MedioPago;
-    Evento?: Evento;
-    Sector?: Sector;
+    idTicket: number;
+    idUsuario: number;
+    idEvento: number;
+    idSector: number;
+    idMedioPago: number;
+    montoPago: number;
+    montoTotal: number;
+    fechaTicket: string;
+    activo: boolean;
+    fechaCreacion: string;
+    fechaModified: string;
+    usuario: Usuario | null;
+    medioPago: MedioPago | null;
+    evento: Evento | null;
+    sector: Sector | null;
 }
