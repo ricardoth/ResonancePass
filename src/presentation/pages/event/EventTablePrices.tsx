@@ -6,6 +6,7 @@ import { Sector } from '../../../domain/entities/Sector';
 import { Evento } from '../../../domain/entities/Evento';
 import { formatCurrency } from '../../../types/currency';
 import { Loader } from '../../components/loader/Loader';
+import { EventoProps } from '../../../domain/interfaces/interfaceProps/IEventoProps';
 import axios from 'axios';
 import './EventTablePrices.css';
 
@@ -14,11 +15,7 @@ const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
 const CURRENCY_CLP = 'CLP';
 
-interface EventTableProps {
-    evento: Evento;
-}
-
-export const EventTablePrices: React.FC<EventTableProps> = ({evento}) => {
+export const EventTablePrices: React.FC<EventoProps> = ({evento}) => {
     const [ sectores, setSectores] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
@@ -84,6 +81,5 @@ export const EventTablePrices: React.FC<EventTableProps> = ({evento}) => {
                 <p className='text-white texto-border'>* Toda Persona que ingrese al recinto debe tener su entrada</p>
             </div>
         </>
-        
     )
 }

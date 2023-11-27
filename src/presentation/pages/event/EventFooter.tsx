@@ -1,12 +1,8 @@
-import { Evento } from "../../../domain/entities/Evento";
+import { EventoProps } from "../../../domain/interfaces/interfaceProps/IEventoProps";
 import { getYearNow } from "../../../utils/formatDateOption";
 import './EventFooter.css';
 
-interface EventTableProps {
-    evento: Evento;
-}
-
-export const EventFooter: React.FC<EventTableProps> = ({evento}) => {
+export const EventFooter: React.FC<EventoProps> = ({evento}) => {
     return (
         <footer className="text-center text-lg-start footer-container">
             <div className="text-center p-3 border-top border-white text-white">

@@ -1,11 +1,8 @@
-import { Evento } from '../../../domain/entities/Evento';
+import { EventoProps } from '../../../domain/interfaces/interfaceProps/IEventoProps';
 import './EventGetTicket.css';
 
-interface EventGetTicketProps {
-    evento: Evento
-}
+export const EventGetTicket: React.FC<EventoProps> = ({evento}) => {
 
-export const EventGetTicket: React.FC<EventGetTicketProps> = ({evento}) => {
     const handleGetTicket = () => {
         console.log("Quiero mi ticket")
     }
@@ -13,7 +10,7 @@ export const EventGetTicket: React.FC<EventGetTicketProps> = ({evento}) => {
     return (
         <center className="center-info-event">
             <div>
-                <h3 style={{color: 'white'}}>Obtén tu ticket para ver {evento.nombreEvento} en {evento.lugar?.nombreLugar}</h3>
+                <h3 className='text-white'>Obtén tu ticket para ver {evento.nombreEvento} en {evento.lugar?.nombreLugar}</h3>
                 <button className='btn btn-outline-light btn-lg' onClick={handleGetTicket}><i className="bi bi-ticket-detailed-fill"></i> COMPRAR TICKET </button>
             </div>
         </center>

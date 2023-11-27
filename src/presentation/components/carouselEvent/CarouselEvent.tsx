@@ -25,12 +25,13 @@ export const CarouselEvent = () => {
     const fetchEventos = async () => {
         try {
             setLoading(true);
-            let {data} = await axios.get(URL_GET_EVENTOS, {
+            let response = await axios.get(URL_GET_EVENTOS, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
                 }
             });
-            let datos = data.data;
+            let {data} = response.data;
+            let datos = data;
             let eventosActivos = datos.filter((ev: Evento) => ev.activo === true);
             setEventos(eventosActivos);
             setLoading(false);
@@ -51,6 +52,7 @@ export const CarouselEvent = () => {
             <div id="carouselExampleCaptions" className="carousel slide">
                 <div className="carousel-indicators">
                 {
+                    loading ? '' :
                     eventos.map( (row: Evento, index: number) => {
                         return (
                             <button type="button" key={index} data-bs-target="#carouselExampleCaptions" data-bs-slide-to={index} className="active" aria-current="true"  aria-label= {`Slide ${row.idEvento}`}></button>
@@ -63,7 +65,7 @@ export const CarouselEvent = () => {
                 {
                     loading ? <LoaderFullScreen /> :
                     eventos.map( (row: Evento) => {
-                        const backgroundImage = `url('data:image/jpeg; base64, ${row.contenidoFlyer} ')`;
+                        const backgroundImage = `url('${row.contenidoFlyer} ')`;
                         if(row.idEvento === 1) {
                             return (
                                 <div key={row.idEvento} className="carousel-item active">
@@ -97,16 +99,20 @@ export const CarouselEvent = () => {
                 }
                 </div>
 
-                <>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                    </button>
-                </>
+                {
+                    loading ? '' :
+                    <>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Next</span>
+                        </button>
+                    </>
+                }
+                
             </div>
         </>
     )

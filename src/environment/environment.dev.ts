@@ -10,5 +10,6 @@ export const environment = {
 
     //Endpoints Tickets
     UrlEventos: "https://api-decimatio-dev.azurewebsites.net/api/Evento",
+    UrlLugares: "https://api-decimatio-dev.azurewebsites.net/api/Lugar",
     UrlGetSectoresByEvento: "https://api-decimatio-dev.azurewebsites.net/api/Sector/GetSectoresByEvento/",
 }
