@@ -7,7 +7,7 @@ import './LayoutEvent.css';
 import { useState, useEffect } from 'react';
 import { formatDateLocaleString } from '../../../utils/formatDateOption';
 import { useNavigate } from 'react-router-dom';
-import { EventFilter } from './EventFilter';
+import { Footer } from '../../components/footer/Footer';
 
 const URL_GET_EVENTOS = environment.UrlEventos;
 const userBasicAuth = basicAuth.username;
@@ -45,7 +45,6 @@ export const LayoutEvent = () => {
     
     return (
         <>
-            {/* <EventFilter /> */}
             <div className="flex-container">
             {
                 eventos.map((row: Evento) => (
@@ -63,6 +62,11 @@ export const LayoutEvent = () => {
                 ))
             }
             </div>
+            <br/>
+            {
+                <Footer/>
+
+            }
         </>
         
     )
