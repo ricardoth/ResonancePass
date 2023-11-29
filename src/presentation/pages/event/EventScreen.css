@@ -1,13 +1,53 @@
-.info-evento {
+.content-event-flyer {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap; 
     justify-content: center;
-    align-items: center; 
-    padding-top: 25%; 
+    align-items: start;
+    background-color: #262721; 
+    border: white 1px solid;
 }
 
-.img-container {
-    box-shadow: 15px 15px 125px 15px rgba(0,0,0,0.74) inset;
-    -webkit-box-shadow: 15px 15px 125px 35px rgba(0,0,0,0.74) inset;
-    -moz-box-shadow: 15px 15px 35px 35px rgba(0,0,0,0.74) inset;
+.content-head-event {
+    flex: 1;
+    padding: 30px 30px 30px 30px; 
+    background-color: #262721; 
+}
+
+.info-evento {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+    border-bottom: white 1px solid;
+}
+
+.icono-y-texto {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+    border-bottom: white 1px solid;
+    padding: 2%;
+} 
+
+.icono-y-texto i {
+    margin-right: 10px; 
+}
+
+.icono-y-texto p {
+    margin-top: 5px;
+}
+
+.container-image {
+    flex: 0 0 auto; 
+    width: 50%; 
+    overflow: hidden; 
+    border: white 1px solid;
+}
+
+.image-flyer {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center; 
 }

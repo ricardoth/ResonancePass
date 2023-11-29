@@ -11,6 +11,8 @@ export interface Evento {
     contenidoFlyer: string;
     observacion: string;
     productoraResponsable: string;
+    banner: boolean;
+    contenidoBanner: string;
     activo: boolean;
     lugar: Lugar | null;
 }

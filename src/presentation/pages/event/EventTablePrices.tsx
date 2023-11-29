@@ -47,7 +47,7 @@ export const EventTablePrices: React.FC<EventoProps> = ({evento}) => {
             {
                 loading ? <Loader /> : 
                 <>
-                    <table className="table border-light sector-table">
+                    <table className="table border-light sector-table animate__animated animate__fadeIn">
                         <thead>
                             <tr>
                                 <th scope="col" className="text-white texto-border">Sector</th>
@@ -76,9 +76,8 @@ export const EventTablePrices: React.FC<EventoProps> = ({evento}) => {
             }
             </div>
 
-
             <div className='text-table-info'>
-                <p className='text-white texto-border'>* Toda Persona que ingrese al recinto debe tener su entrada</p>
+                <p className='text-white texto-border'>* Toda persona que ingrese al recinto debe tener su ticket de acceso</p>
             </div>
         </>
     )

@@ -32,7 +32,7 @@ export const CarouselEvent = () => {
             });
             let {data} = response.data;
             let datos = data;
-            let eventosActivos = datos.filter((ev: Evento) => ev.activo === true);
+            let eventosActivos = datos.filter((ev: Evento) => ev.activo === true && ev.banner === true);
             setEventos(eventosActivos);
             setLoading(false);
         } catch (error) {
@@ -64,9 +64,9 @@ export const CarouselEvent = () => {
                 <div className="carousel-inner">
                 {
                     loading ? <LoaderFullScreen /> :
-                    eventos.map( (row: Evento) => {
+                    eventos.map( (row: Evento, index: number) => {
                         const backgroundImage = `url('${row.contenidoFlyer} ')`;
-                        if(row.idEvento === 1) {
+                        if(index === 0) {
                             return (
                                 <div key={row.idEvento} className="carousel-item active">
                                     <div className='carrousel-image-container d-block w-100' style={{backgroundImage}}>

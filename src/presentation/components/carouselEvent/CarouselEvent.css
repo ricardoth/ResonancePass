@@ -5,7 +5,6 @@
     background-repeat: no-repeat; 
     box-shadow: 100px 100px 100px 100px rgba(0,0,0,0.74) inset !important;
     -webkit-box-shadow: 100px 100px 100px 100px rgba(0,0,0,0.74) inset !important;
-    -moz-box-shadow: 100px 100px 100px 100px rgba(0,0,0,0.74) inset !important;
 }
 
 .carousel-caption {

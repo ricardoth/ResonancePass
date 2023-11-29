@@ -1,0 +1,49 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    padding: 0 5%; 
+    overflow: hidden;
+}
+
+.flex-items {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    text-align: center;
+    margin-top: 35px;
+    width: 30%;
+}
+
+@media screen and (max-width: 599px) {
+    .flex-items {
+        width: 100%; 
+        margin: 5px 0;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 899px) {
+    .flex-items {
+        width: 48%; 
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .flex-items {
+        width: 30%; 
+    }
+}
+
+.image-flyer {
+    height: 388px !important;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.card-title {
+    border-bottom: #4e4e4e 1px solid;
+}
+
+.calendar {
+    border-bottom: #4e4e4e 1px solid;
+}

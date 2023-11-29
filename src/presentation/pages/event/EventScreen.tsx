@@ -7,27 +7,45 @@ import { EventTablePrices } from './EventTablePrices';
 import { EventReferencialMap } from './EventReferencialMap';
 import { EventGetTicket } from './EventGetTicket';
 import './EventScreen.css';
-import { EventDescription } from './EventDescription';
 
 export const EventScreen = () => {
     const location = useLocation();
     const eventState: Evento = location.state?.eventDetails;
-    const backgroundImage = `url('${eventState.contenidoFlyer}')`;
+    const backgroundImage = `${eventState.contenidoFlyer}`;
 
     return (
         <>
             <Navbar />
-                <div className='img-container animate__animated animate__pulse' style={{ backgroundImage,  maxWidth: '100%', height: '150vh', backgroundSize: 'cover'}}>
+            <section className='content-event-flyer animate__animated animate__fadeIn'>
+                <picture className='container-image'>
+                    <img className='image-flyer' src={backgroundImage}/>
+                </picture>
+
+                <section className='content-head-event'>
                     <div className='info-evento'>
-                        <h1 className='display-4 text-white texto-border'>{formatDateLocaleString(eventState.fecha)}</h1>
-                        <h3 className='display-6 text-white texto-border'>{eventState.lugar?.nombreLugar} - {getHourEvent(eventState.fecha)}</h3>
+                        <h3 className='text-white texto-border'><strong>{eventState.nombreEvento}</strong></h3>
+                        <h5 className='text-white texto-border'><i className="bi bi-calendar3"></i> {formatDateLocaleString(eventState.fecha)} - {getHourEvent(eventState.fecha)} Hrs.</h5>
                     </div>
-                </div>
+                    <div className="icono-y-texto">
+                        <h4 className='text-white texto-border'><i className="bi bi-geo-alt-fill"></i> {eventState.lugar?.nombreLugar}</h4>
+                        <p className='text-white texto-border'>{eventState.lugar?.ubicacion} {eventState.lugar?.numeracion}</p>
+                    </div>
+
+                    <div className='info-observacion'>
+                        <div className="col-lg-12 animate__animated animate__fadeInDown">
+                            <h4 className="text-white text-center">{eventState.descripcion}</h4>
+                            <p className="text-white text-center">
+                                {eventState.observacion}
+                            </p>
+                        </div>
+                    </div>
+                    
+                </section>
+            </section>
 
             <EventReferencialMap evento={eventState} />
             <EventTablePrices evento={eventState}/> 
             <EventGetTicket evento={eventState} />
-            <EventDescription evento={eventState}/>
             <EventFooter evento={eventState} /> 
         </>
         

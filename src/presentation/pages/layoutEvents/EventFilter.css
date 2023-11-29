@@ -1,0 +1,6 @@
+.form-container-event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 80px 10px 80px;
+}
