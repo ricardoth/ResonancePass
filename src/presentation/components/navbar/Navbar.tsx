@@ -1,4 +1,3 @@
-// import { Link } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import resonanceImg from '../../../assets/images/resonancePassBGWhite.png';
 import { Searchbar } from '../searchBar/Searchbar';

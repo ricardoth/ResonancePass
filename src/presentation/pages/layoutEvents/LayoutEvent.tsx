@@ -16,9 +16,11 @@ const passBasicAuth = basicAuth.password;
 export const LayoutEvent = () => {
     const navigate = useNavigate();
     const [ eventos, setEventos] = useState([]);
+    const [ loading, setLoading ] = useState(false);
 
     const fetchEventos = async () => {
         try {
+            setLoading(true);
             let response = await axios.get(URL_GET_EVENTOS, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
@@ -28,8 +30,10 @@ export const LayoutEvent = () => {
             let datos = data;
             let eventosActivos = datos.filter((ev: Evento) => ev.activo === true);
             setEventos(eventosActivos);
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     }
 
@@ -64,8 +68,9 @@ export const LayoutEvent = () => {
             </div>
             <br/>
             {
-                <Footer/>
-
+                !loading && (
+                    <Footer/>
+                ) 
             }
         </>
         

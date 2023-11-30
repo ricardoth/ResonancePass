@@ -3,6 +3,7 @@ import { PublicRoute } from "./PublicRoute"
 import { LoginScreen } from "../pages/login/LoginScreen"
 import { HomeRoutes } from "./HomeRoutes"
 import { EventScreen } from "../pages/event/EventScreen"
+import { ShopTicket } from "../pages/buys/ShopTicket"
 
 export const AppRouter = () => {
     return (
@@ -26,12 +27,20 @@ export const AppRouter = () => {
                     }
                 />
 
-
                 <Route 
                     path="/eventScreen"
                     element={
                         <PublicRoute>
                             <EventScreen />
+                        </PublicRoute>
+                    }
+                />
+
+                <Route
+                    path="/carro" 
+                    element={
+                        <PublicRoute>
+                            <ShopTicket />
                         </PublicRoute>
                     }
                 />
