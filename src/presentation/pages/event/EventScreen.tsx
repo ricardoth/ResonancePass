@@ -8,7 +8,6 @@ import { EventReferencialMap } from './EventReferencialMap';
 import { EventGetTicket } from './EventGetTicket';
 import './EventScreen.css';
 
-
 export const EventScreen = () => {
     const location = useLocation();
     const eventState: Evento = location.state?.eventDetails;
@@ -17,7 +16,7 @@ export const EventScreen = () => {
     return (
         <>
             <NavbarEvent/>
-            <section  className='content-event-flyer animate__animated animate__fadeIn'>
+            <section className='content-event-flyer animate__animated animate__fadeIn'>
                 <picture className='container-image'>
                     <img className='image-flyer' src={backgroundImage}/>
                 </picture>

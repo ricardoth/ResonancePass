@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { EventoProps } from '../../../domain/interfaces/interfaceProps/IEventoProps';
-import './EventGetTicket.css';
 import { Evento } from '../../../domain/entities/Evento';
+import './EventGetTicket.css';
 
 export const EventGetTicket: React.FC<EventoProps> = ({evento}) => {
     const navigate = useNavigate();

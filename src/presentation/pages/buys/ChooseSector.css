@@ -1,0 +1,34 @@
+.sector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+
+#table-container-sector {
+    display: block; 
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    background-color: white;
+    width: 90%;
+
+}
+
+#table-sector {
+    margin: 20px;
+    width: 100%;
+}
+
+.input-cantidad {
+    width: 80%;
+}
+
+.confirm-button {
+    width: 100%;
+}
+
+.btn-confirm {
+    margin-right: 30%;
+    margin-left: 30%;
+}

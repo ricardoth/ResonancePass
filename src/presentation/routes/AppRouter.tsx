@@ -34,7 +34,7 @@ export const AppRouter = () => {
                             <EventScreen />
                         </PublicRoute>
                     }
-                />
+                /> 
 
                 <Route
                     path="/carro" 
