@@ -4,6 +4,7 @@ import { LoginScreen } from "../pages/login/LoginScreen"
 import { HomeRoutes } from "./HomeRoutes"
 import { EventScreen } from "../pages/event/EventScreen"
 import { ShopTicket } from "../pages/buys/ShopTicket"
+import { ConfirmShop } from "../pages/buys/ConfirmShop"
 
 export const AppRouter = () => {
     return (
@@ -41,6 +42,15 @@ export const AppRouter = () => {
                     element={
                         <PublicRoute>
                             <ShopTicket />
+                        </PublicRoute>
+                    }
+                />
+
+                <Route
+                    path="/confirmShop" 
+                    element={
+                        <PublicRoute>
+                            <ConfirmShop />
                         </PublicRoute>
                     }
                 />

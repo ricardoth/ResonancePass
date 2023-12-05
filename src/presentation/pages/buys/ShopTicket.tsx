@@ -4,15 +4,11 @@ import './ShopTicket.css';
 import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatDateLocaleString, getHourEvent } from "../../../utils/formatDateOption";
 import { ChooseSector } from "./ChooseSector";
+import { Evento } from "../../../domain/entities/Evento";
 
 export const ShopTicket = () => {
     const location = useLocation();
-    const {eventDetails, email} = location.state?.payload;
-
-    useEffect(() => {
-     
-    }, []);
-    
+    const eventState: Evento = location.state?.eventDetails;
 
     return (
         <>
@@ -23,25 +19,23 @@ export const ShopTicket = () => {
                         <h4><strong>Tu Compra</strong></h4>
                         <div className="col-lg-4">
                             <h6><strong>Evento</strong></h6>
-                            <p>{eventDetails.nombreEvento}</p>
-                            <img src={eventDetails.contenidoFlyer} width={100}/>
+                            <p>{eventState.nombreEvento}</p>
+                            <img src={eventState.contenidoFlyer} width={100}/>
                         </div>
                        
                         <div className="col-lg-4">
                             <h6><strong>Lugar</strong></h6>
-                            <p>{eventDetails.lugar?.nombreLugar} {eventDetails.lugar?.numeracion}</p>
+                            <p>{eventState.lugar?.nombreLugar} {eventState.lugar?.numeracion}</p>
                         </div>
 
                         <div className="col-lg-4">
                             <h6><strong>Fecha</strong></h6>
-                            <p><i className="bi bi-calendar3"></i> {formatDateLocaleString(eventDetails.fecha)} - {getHourEvent(eventDetails.fecha)} Hrs.</p>
+                            <p><i className="bi bi-calendar3"></i> {formatDateLocaleString(eventState.fecha)} - {getHourEvent(eventState.fecha)} Hrs.</p>
                         </div>
                     </div>
                 </article>
             </section>
-           
-            <ChooseSector evento={eventDetails}/> 
+            <ChooseSector evento={eventState}/> 
         </>
-        
     )
 }

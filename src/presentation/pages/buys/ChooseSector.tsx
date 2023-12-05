@@ -3,12 +3,13 @@ import { environment } from '../../../environment/environment.dev';
 import { basicAuth } from '../../../types/basicAuth';
 import { Buffer } from 'buffer';
 import { Evento } from "../../../domain/entities/Evento";
-import { Sector } from "../../../domain/entities/Sector";
+import { Sector } from '../../../domain/entities/Sector';
 import { useState, useEffect } from 'react';
 import { EventoProps } from "../../../domain/interfaces/interfaceProps/IEventoProps";
 import { formatCurrency } from "../../../types/currency";
 import './ChooseSector.css';
 import { Loader } from "../../components/loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const URL_GET_SECTORES_BY_EVENT = environment.UrlGetSectoresByEvento;
 const userBasicAuth = basicAuth.username;
@@ -16,6 +17,7 @@ const passBasicAuth = basicAuth.password;
 const CURRENCY_CLP = 'CLP';
 
 export const ChooseSector: React.FC<EventoProps> = ({evento}) => {
+    const navigate = useNavigate();
     const [ sectores, setSectores ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ seleccionSectores, setSeleccionSectores ] = useState([]);
@@ -39,9 +41,12 @@ export const ChooseSector: React.FC<EventoProps> = ({evento}) => {
     }
 
     useEffect(() => {
+        setSeleccionSectores([]);
+    }, [sectores]);
+
+    useEffect(() => {
         fetchSectores(evento);
     }, []);
-
 
     const handleChangeSelect = ({target}: any, idSector: number) => {
         const nuevaCantidad = parseInt(target.value, 10);
@@ -66,7 +71,22 @@ export const ChooseSector: React.FC<EventoProps> = ({evento}) => {
     }
 
     const calculateTickets = () => {
-        console.log(seleccionSectores);
+        const tickets: any[]= [];
+
+       seleccionSectores.map((sec: Sector) => {
+            const selectedSector = sectores.filter((st: Sector) => st.idSector == sec.idSector);
+            tickets.push(selectedSector);
+        })
+        console.log(tickets)
+
+
+
+        //proceder a Formas de Pago y luego confirmación
+        //Envía parámetros por useLocation react-router-dom
+        
+        // navigate('/confirmShop', {
+        //     state: { seleccionSectores }
+        // });
     }
 
     return (
@@ -127,7 +147,7 @@ export const ChooseSector: React.FC<EventoProps> = ({evento}) => {
                     </table>
                     <div className="confirm-button">
                         <div className="d-grid gap-2">
-                            <button className="btn btn-warning btn-confirm" onClick={calculateTickets}>Confirmar</button>
+                            <button className="btn btn-warning btn-confirm" onClick={calculateTickets} disabled={seleccionSectores.length <= 0} >Confirmar</button>
                         </div>
                         
                     </div>

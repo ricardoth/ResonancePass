@@ -1,9 +1,9 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import image from '../../../assets/images/resonancePassWhite.png';
+import image from '../../../assets/images/logoimagen2.png';
 import { NavbarEvent } from '../../components/navbar/NavBarEvent';
 import * as Yup from 'yup';
 import './LoginScreen.css';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 interface LoginFormValues {
     email: string;
