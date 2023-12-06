@@ -7,7 +7,7 @@ interface PrivateRouteProps {
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({children}) => {
-    const { userState, dispatch } = useAuth();
+    const { userState } = useAuth();
     const { pathname, search } = useLocation();
 
     localStorage.setItem('lastPath', pathname + search);

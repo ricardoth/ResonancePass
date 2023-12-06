@@ -7,7 +7,7 @@ interface PublicRouteProps {
 }
 
 export const PublicRoute: React.FC<PublicRouteProps> = ({children}) => {
-    const { userState, dispatch } = useAuth();
+    const { userState } = useAuth();
 
     return !userState.logged ?
         children

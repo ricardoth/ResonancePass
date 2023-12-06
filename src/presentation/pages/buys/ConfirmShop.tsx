@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLocation } from "react-router-dom"
 import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatCurrency } from "../../../types/currency";
@@ -11,9 +10,13 @@ const CURRENCY_CLP = 'CLP';
 
 export const ConfirmShop = () => {
     const location = useLocation();
-    const [ tickets, setTickets ] = useState(location.state?.ticketDetails);
-    const [ total, setTotal ] = useState(location.state?.sumTotal);
-    const [ eventDetails, setEventDetails ] = useState(location.state?.evento);
+    // const [ tickets, setTickets ] = useState(location.state?.ticketDetails);
+    // const [ total, setTotal ] = useState(location.state?.sumTotal);
+    // const [ eventDetails, setEventDetails ] = useState(location.state?.evento);
+
+    const tickets = location.state?.ticketDetails;
+    const total: number = location.state?.sumTotal;
+    const eventDetails = location.state?.evento;
 
     return (
         <>

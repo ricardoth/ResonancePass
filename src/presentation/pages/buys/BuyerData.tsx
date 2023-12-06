@@ -6,7 +6,6 @@ interface FormBuyerData {
     password: string
 }
 
-
 export const BuyerData = () => {
 
 
@@ -23,9 +22,9 @@ export const BuyerData = () => {
     });
 
     return (
-        <div className='container-form-buyer mt-2'>
+        <div className='container-form-buyer mt-5'>
             <form onSubmit={formik.handleSubmit}>
-                    <h5><strong>Datos Comprador</strong></h5>
+                    <h5><strong>Datos Usuario</strong></h5>
                     <div className="col-lg-12">
                         <label>RUT</label> 
                         <input 

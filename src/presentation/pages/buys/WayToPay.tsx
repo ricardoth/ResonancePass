@@ -36,14 +36,18 @@ export const WayToPay = () => {
         fetchMediosPagos();
     }, []);
 
+    const handleRadioPayWay = (paramIdMedioPago: number) => {
+        console.log(paramIdMedioPago)
+    }
+
     return (
-        <div className="container-medio-pago mt-2">
-            <h5><strong>Selecciona tu forma de pago</strong></h5>
+        <div className="container-medio-pago mt-5">
+            <h5><strong>Forma de Pago</strong></h5>
             {
                 loading ? <Loader /> : 
                 mediosPagos.map((mp: MedioPago) => (
-                    <div className="contenedor-pasarela">
-                        <input className="form-check-input mt-2" type="radio" name="listGroupRadio" value={mp.idMedioPago} id="firstRadio" />
+                    <div key={mp.idMedioPago} className="contenedor-pasarela">
+                        <input className="form-check-input mt-2" type="radio" onClick={() => handleRadioPayWay(mp.idMedioPago)} name="listGroupRadio" value={mp.idMedioPago} id={`${mp.idMedioPago}`} />
                         &nbsp; 
                         <label className="form-check-label" htmlFor={`${mp.idMedioPago}`}> {mp.nombreMedioPago} </label>
                         &nbsp; &nbsp;
