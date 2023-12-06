@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom"
-import { useEffect } from 'react';
 import './ShopTicket.css';
 import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatDateLocaleString, getHourEvent } from "../../../utils/formatDateOption";

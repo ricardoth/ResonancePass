@@ -2,10 +2,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #F2F2F2;
 }
 
 .section-confirm-panel {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    background-color: #F2F2F2;
+}
+
+.section-buyer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+
+#panel-form-buyer {
+    display: flex; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: white;
+    width: 90%;
+}
+
+#panel-shop-account {
+    display: flex; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: white;
+    width: 90%;
+}
+
+.list-event {
+    margin-left: -15px;
 }

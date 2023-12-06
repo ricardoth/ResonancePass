@@ -71,22 +71,22 @@ export const ChooseSector: React.FC<EventoProps> = ({evento}) => {
     }
 
     const calculateTickets = () => {
-        const tickets: any[]= [];
+        const selectedSectores = new Set(seleccionSectores.map((item: Sector) => item.idSector));
+        const tickets = sectores.filter((item: Sector) => selectedSectores.has(item.idSector));
+        const ticketDetails = tickets.map((row: any) => {
+            const itemSelected: any = seleccionSectores.find((x: Sector) => x.idSector === row.idSector);
+            let obj: any = {};
+            obj = row;
+            obj.cantidad = itemSelected.cantidad;
+            obj.cantidadValorTotal = obj.cantidad * obj.total;
+            return obj;
+        });
 
-       seleccionSectores.map((sec: Sector) => {
-            const selectedSector = sectores.filter((st: Sector) => st.idSector == sec.idSector);
-            tickets.push(selectedSector);
-        })
-        console.log(tickets)
-
-
-
-        //proceder a Formas de Pago y luego confirmación
-        //Envía parámetros por useLocation react-router-dom
+        const sumTotal = ticketDetails.reduce((acc, objAct) => acc + objAct.cantidadValorTotal, 0);
         
-        // navigate('/confirmShop', {
-        //     state: { seleccionSectores }
-        // });
+        navigate('/confirmShop', {
+            state: { ticketDetails, sumTotal, evento }
+        });
     }
 
     return (
