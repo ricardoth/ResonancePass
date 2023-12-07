@@ -1,15 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import { EventoProps } from '../../../domain/interfaces/interfaceProps/IEventoProps';
 import { Evento } from '../../../domain/entities/Evento';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
 import './EventGetTicket.css';
 
 export const EventGetTicket: React.FC<EventoProps> = ({evento}) => {
     const navigate = useNavigate();
-
+    const { loginState } = useContext(AuthContext);
+    
     const handleGetTicket = (eventDetails: Evento) => {
-        navigate('/login',{
-            state: { eventDetails }
-        });
+        if (loginState.logged) {
+            navigate('/carro', {
+                state: [ eventDetails ]
+            });
+        } else {
+            navigate('/login',{
+                state: { eventDetails }
+            });
+        }
     }
 
     return (

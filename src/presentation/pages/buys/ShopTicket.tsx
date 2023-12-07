@@ -4,16 +4,10 @@ import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatDateLocaleString, getHourEvent } from "../../../utils/formatDateOption";
 import { ChooseSector } from "./ChooseSector";
 import { Evento } from "../../../domain/entities/Evento";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext";
 
 export const ShopTicket = () => {
-    const { loginState } = useContext(AuthContext); 
     const location = useLocation();
     const eventState: Evento = location.state[0];
-
-    console.log(eventState)
-    console.log(loginState)
 
     return (
         <>

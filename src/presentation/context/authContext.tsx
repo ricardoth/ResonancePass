@@ -9,13 +9,26 @@ const initialState: AuthState = {
     user: null
 };
 
-export const AuthContext = createContext<AuthContextProps>({loginState: initialState, dispatch: () => null });
+const init = (): AuthState => {
+    //localStorage.clear();
+    const storedData = localStorage.getItem('loginState');
+    if (storedData) {
+        try {
+            return JSON.parse(storedData);
+        } catch (error) {
+            console.error('Error parsing stored auth data', error);
+        }
+    }
+    return initialState;
+};
+
+export const AuthContext = createContext<AuthContextProps>({loginState: initialState, dispatchLoginState: () => null });
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
-    const [ loginState, dispatch ] = useReducer(authReducer, initialState); 
-
+    const [ loginState, dispatchLoginState ] = useReducer(authReducer, initialState, init); 
+ 
     return (
-        <AuthContext.Provider value={{ loginState, dispatch }}>
+        <AuthContext.Provider value={{ loginState, dispatchLoginState }}>
             {children}
         </AuthContext.Provider>
     );

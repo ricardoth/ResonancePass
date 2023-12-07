@@ -9,7 +9,7 @@ import { environment } from '../../../environment/environment.dev';
 import { basicAuth } from '../../../types/basicAuth';
 import { Buffer } from 'buffer';
 import { toast } from 'react-toastify';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { Loader } from '../../components/loader/Loader';
 import { types } from '../../../types/types';
 import { AuthContext } from '../../context/authContext';
@@ -32,7 +32,7 @@ const validationSchema = Yup.object({
 });
 
 export const LoginScreen = () => {
-    const { dispatch } = useContext(AuthContext);
+    const { dispatchLoginState } = useContext(AuthContext);
     const [ loading, setLoading ] = useState(false);
     const location = useLocation();
     const eventDetails = location.state?.eventDetails;
@@ -46,7 +46,6 @@ export const LoginScreen = () => {
         },
         validationSchema : validationSchema,
         onSubmit: async (values) => {
-            
             try {
                 setLoading(true);
                 let response = await axios.post(URL_USUARIO_LOGIN, values ,{
@@ -59,9 +58,16 @@ export const LoginScreen = () => {
                 //Envío a context
                 const basicInfoUser: any = {
                     type: types.login,
-                    payload: usuario
+                    payload: usuario,
                 }
-                dispatch(basicInfoUser);
+
+                const loginInfo = {
+                    logged: true,
+                    user: usuario
+                }
+                dispatchLoginState(basicInfoUser);
+                // localStorage.setItem('user', JSON.stringify(basicInfoUser));
+                localStorage.setItem('loginState', JSON.stringify(loginInfo));
 
                 if (previousPath == '/' || previousPath == '') {
                     navigate('/');

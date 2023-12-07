@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 // import { useAuth } from '../context/authContext';
+// import { Navigate } from 'react-router-dom';
 // import { useLogin } from '../../application/hooks/useLogin';
 
 interface PublicRouteProps {
@@ -7,12 +8,12 @@ interface PublicRouteProps {
 }
 
 export const PublicRoute: React.FC<PublicRouteProps> = ({children}) => {
-    // const { loginState } = useAuth();
+    // const { user } = useAuth();
     // const isLogged = useLogin();
 
     // localStorage.setItem('lastPath', pathname + search);
 
-    // return !loginState.logged ?
+    // return !user.logged ?
     //     children
     //     : <Navigate to="/" />
     return children;

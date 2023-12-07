@@ -6,7 +6,7 @@ import { types } from '../../../types/types';
 import './Navbar.css';
 
 export const NavbarEvent = () => {
-    const { loginState, dispatch } = useContext(AuthContext);
+    const { loginState, dispatchLoginState } = useContext(AuthContext);
     const navigate = useNavigate();
     const topRef = useRef<HTMLElement>(null);
 
@@ -15,7 +15,7 @@ export const NavbarEvent = () => {
             type: types.logout,
             payload: null
         };
-        dispatch(logoutInfo);
+        dispatchLoginState(logoutInfo);
         navigate("/", {
             replace: true
         });

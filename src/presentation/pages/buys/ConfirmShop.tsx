@@ -4,9 +4,9 @@ import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatCurrency } from "../../../types/currency";
 import { formatDateHour } from '../../../utils/formatDateOption';
 import { WayToPay } from './WayToPay';
-import { BuyerData } from './BuyerData';
+// import { BuyerData } from './BuyerData';cls
 import './ConfirmShop.css';
-import { useFormik } from 'formik';
+// import { useFormik } from 'formik';
 
 const CURRENCY_CLP = 'CLP';
 
@@ -22,20 +22,20 @@ export const ConfirmShop = () => {
         console.log(radioValue)
     }, [radioValue]);
 
-    const formik = useFormik({
-        initialValues: {
-            idEvento: 0,
-            idSector: 0,
-            idUsuario: 0,
-            idMedioPago: 0,
+    // const formik = useFormik({
+    //     initialValues: {
+    //         idEvento: 0,
+    //         idSector: 0,
+    //         idUsuario: 0,
+    //         idMedioPago: 0,
             
-        },
-        // validationSchema : validationSchema,
-        onSubmit: (values) => {
+    //     },
+    //     // validationSchema : validationSchema,
+    //     onSubmit: (values) => {
             
-           console.log(values)
-        },
-    });
+    //        console.log(values)
+    //     },
+    // });
 
     return (
         <>

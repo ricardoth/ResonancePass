@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/authContext';
 import { types } from '../../../types/types';
 
 export const Navbar = () => {
-    const { loginState, dispatch } = useContext(AuthContext);
+    const { loginState, dispatchLoginState } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -15,7 +15,7 @@ export const Navbar = () => {
             type: types.logout,
             payload: null
         };
-        dispatch(logoutInfo);
+        dispatchLoginState(logoutInfo);
         navigate("/", {
             replace: true
         });
@@ -95,7 +95,7 @@ export const Navbar = () => {
                                         <li>
                                             <Link className='nav-item text-white' to={"/changePassword"}>Cambiar Contraseña</Link>
                                         </li>
-                                        <li nav-item text-white>
+                                        <li>
                                             <a className='nav-item text-white' onClick={handleLogout}>Cerrar Sesión</a>
                                         </li>
                                     </>

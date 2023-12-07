@@ -8,7 +8,7 @@ interface RouteProps {
 const RouteTracker: React.FC<RouteProps> = ({ children }) => {
     const location = useLocation();
     const [currentPath, setCurrentPath] = useState<string>('');
-    const [previousPath, setPreviousPath] = useState<string>('');
+    const [, setPreviousPath] = useState<string>('');
 
     useEffect(() => {
         if (location.pathname !== currentPath) {
