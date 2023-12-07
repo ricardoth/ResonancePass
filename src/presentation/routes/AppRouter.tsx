@@ -5,10 +5,14 @@ import { HomeRoutes } from "./HomeRoutes"
 import { EventScreen } from "../pages/event/EventScreen"
 import { ShopTicket } from "../pages/buys/ShopTicket"
 import { ConfirmShop } from "../pages/buys/ConfirmShop"
+import { PrivateRoute } from "./PrivateRoute"
+import { ChangePassword } from "../pages/account/ChangePassword"
+import { RouteHistoryProvider } from "../context/historyContext"
 
 export const AppRouter = () => {
     return (
         <BrowserRouter>
+            <RouteHistoryProvider>
             <Routes>
                 <Route 
                     path="/login"
@@ -37,24 +41,35 @@ export const AppRouter = () => {
                     }
                 /> 
 
+                <Route 
+                    path="/changePassword"
+                    element={
+                        <PrivateRoute>
+                            <ChangePassword />
+                        </PrivateRoute>
+                    }
+                />
+
                 <Route
                     path="/carro" 
                     element={
-                        <PublicRoute>
+                        <PrivateRoute>
                             <ShopTicket />
-                        </PublicRoute>
+                        </PrivateRoute>
                     }
                 />
 
                 <Route
                     path="/confirmShop" 
                     element={
-                        <PublicRoute>
+                        <PrivateRoute>
                             <ConfirmShop />
-                        </PublicRoute>
+                        </PrivateRoute>
                     }
                 />
+
             </Routes>
+            </RouteHistoryProvider>
         </BrowserRouter>
     )
 }

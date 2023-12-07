@@ -1,15 +1,19 @@
 import { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+// import { useAuth } from '../context/authContext';
+// import { useLogin } from '../../application/hooks/useLogin';
 
 interface PublicRouteProps {
     children: ReactNode;
 }
 
 export const PublicRoute: React.FC<PublicRouteProps> = ({children}) => {
-    const { userState } = useAuth();
+    // const { loginState } = useAuth();
+    // const isLogged = useLogin();
 
-    return !userState.logged ?
-        children
-        : <Navigate to="/" />
+    // localStorage.setItem('lastPath', pathname + search);
+
+    // return !loginState.logged ?
+    //     children
+    //     : <Navigate to="/" />
+    return children;
 }

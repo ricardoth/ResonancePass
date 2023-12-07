@@ -1,42 +1,80 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate  } from 'react-router-dom';
 import { useFormik } from 'formik';
 import image from '../../../assets/images/logoimagen2.png';
 import { NavbarEvent } from '../../components/navbar/NavBarEvent';
 import * as Yup from 'yup';
 import './LoginScreen.css';
+import axios from 'axios';
+import { environment } from '../../../environment/environment.dev';
+import { basicAuth } from '../../../types/basicAuth';
+import { Buffer } from 'buffer';
+import { toast } from 'react-toastify';
+import { useContext, useState, useEffect } from 'react';
+import { Loader } from '../../components/loader/Loader';
+import { types } from '../../../types/types';
+import { AuthContext } from '../../context/authContext';
+import { useRouteHistory } from '../../context/historyContext';
+
+const URL_USUARIO_LOGIN = environment.UrlUsuarios + "/Login";
+const userBasicAuth = basicAuth.username;
+const passBasicAuth = basicAuth.password;
 
 interface LoginFormValues {
-    email: string;
-    password: string;
+    correo: string;
+    contrasena: string;
 }
 
 const validationSchema = Yup.object({
-    email: Yup.string()
+    correo: Yup.string()
       .email('Debe ingresar un email válido')
       .required('El Email es requerido'),
-    password: Yup.string().required('La Contraseña es requerida'),
+      contrasena: Yup.string().required('La Contraseña es requerida'),
 });
 
 export const LoginScreen = () => {
+    const { dispatch } = useContext(AuthContext);
+    const [ loading, setLoading ] = useState(false);
     const location = useLocation();
+    const eventDetails = location.state?.eventDetails;
     const navigate = useNavigate();
+    const { previousPath } = useRouteHistory();
 
     const formik = useFormik<LoginFormValues>({
         initialValues: {
-            email: '',
-            password: ''
+            correo: '',
+            contrasena: ''
         },
         validationSchema : validationSchema,
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             
-            let payload = {
-                email: values.email,
-                ...location.state
-            }
+            try {
+                setLoading(true);
+                let response = await axios.post(URL_USUARIO_LOGIN, values ,{
+                    headers: {
+                        Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
+                    }
+                });
+                let usuario = response.data.data;
+                setLoading(false);
+                //Envío a context
+                const basicInfoUser: any = {
+                    type: types.login,
+                    payload: usuario
+                }
+                dispatch(basicInfoUser);
 
-            navigate('/carro', {
-                state: {payload}
-            })
+                if (previousPath == '/' || previousPath == '') {
+                    navigate('/');
+                } else {
+                    navigate('/carro', {
+                        state: [ eventDetails ]
+                    });
+                }
+                
+            } catch (error: any) {
+                setLoading(false);
+                toast.error(error.response.data.Message);
+            }
         },
     });
 
@@ -52,44 +90,51 @@ export const LoginScreen = () => {
                 <div id="right-login">
                     <form id='container-right' className='container' onSubmit={formik.handleSubmit}>
                         <h5>Iniciar Sesión</h5>
-                        <div className="col-lg-6">
+                        <div className="col-lg-8">
                             <label>Email</label>
                             <input 
                                 type="text"
-                                name='email'
+                                name='correo'
                                 placeholder="Ingresa tu Email"
                                 className="form-control"
-                                value={formik.values.email}
+                                value={formik.values.correo}
                                 onChange={formik.handleChange}
+                                // autoComplete='off'
                             />
 
-                            {formik.touched.email && formik.errors.email ? (
-                                <div style={{color:'red'}}>{formik.errors.email}</div>
+                            {formik.touched.correo && formik.errors.correo ? (
+                                <div style={{color:'red'}}>{formik.errors.correo}</div>
                                 ) : null}
                         </div>
-                        <br/>
-                        <div className="col-lg-6">
+                        <div className="col-lg-8">
                             <label>Contraseña</label>
                             <input 
                                 type="password"
-                                name='password'
+                                name='contrasena'
                                 placeholder="Contraseña"
                                 className="form-control"
-                                value={formik.values.password}
+                                value={formik.values.contrasena}
                                 onChange={formik.handleChange}
+                                autoComplete='off'
                             />
                             
-                            {formik.touched.password && formik.errors.password ? (
-                                <div style={{color:'red'}}>{formik.errors.password}</div>
+                            {formik.touched.contrasena && formik.errors.contrasena ? (
+                                <div style={{color:'red'}}>{formik.errors.contrasena}</div>
                                 ) : null}
                         </div>
-                        <br/>
-                        <div className='col-lg-6'>
-                            <div className="d-grid gap-2">
-                                <button className="btn btn-warning" type="submit">Ingresar</button>
-                            </div>
+                        <div className='register-login'>
+                            {/* <Link to={'/resetPassword'}>¿Olvidaste tu Contraseña?</Link> */}
+                            <a href='#'>¿No tienes cuenta? Registrate</a>
                         </div>
-                        
+                        <br/>
+                        {
+                            loading ? <Loader /> :
+                            <div className='col-lg-8'>
+                                <div className="d-grid gap-2">
+                                    <button className="btn btn-warning" type="submit">Ingresar</button>
+                                </div>
+                            </div>
+                        }
                     </form>
                 </div>
             </div>

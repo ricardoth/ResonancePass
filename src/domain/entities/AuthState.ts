@@ -1,13 +1,8 @@
-export interface User {
-    name: string;
-    email: string;
-}
-
 export interface AuthState {
     logged: boolean;
-    user: User | null;
+    user: any;
 }
 
 export type AuthAction = 
-    | { type: 'LOGIN'; payload: User }
-    | { type: 'LOGOUT' };
+    | { type: 'LOGIN'; payload: any }
+    | { type: 'LOGOUT';  };

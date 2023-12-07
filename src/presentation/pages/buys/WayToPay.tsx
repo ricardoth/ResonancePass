@@ -11,7 +11,12 @@ const URL_MEDIO_PAGO = environment.UrlMedioPago;
 const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
 
-export const WayToPay = () => {
+interface WayPayRadioProps {
+    radioValue: number,
+    setRadioValue: React.Dispatch<React.SetStateAction<number>>
+}
+
+export const WayToPay: React.FC<WayPayRadioProps> = ({radioValue, setRadioValue}) => {
     const [ mediosPagos, setMediosPagos] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
@@ -37,7 +42,7 @@ export const WayToPay = () => {
     }, []);
 
     const handleRadioPayWay = (paramIdMedioPago: number) => {
-        console.log(paramIdMedioPago)
+        setRadioValue(paramIdMedioPago);
     }
 
     return (
@@ -47,11 +52,11 @@ export const WayToPay = () => {
                 loading ? <Loader /> : 
                 mediosPagos.map((mp: MedioPago) => (
                     <div key={mp.idMedioPago} className="contenedor-pasarela">
-                        <input className="form-check-input mt-2" type="radio" onClick={() => handleRadioPayWay(mp.idMedioPago)} name="listGroupRadio" value={mp.idMedioPago} id={`${mp.idMedioPago}`} />
+                        <input className="form-check-input mt-2" type="radio" onClick={() => handleRadioPayWay(mp.idMedioPago)} name="listGroupRadio" value={radioValue} id={`${mp.idMedioPago}`} />
                         &nbsp; 
                         <label className="form-check-label" htmlFor={`${mp.idMedioPago}`}> {mp.nombreMedioPago} </label>
                         &nbsp; &nbsp;
-                        <img src={mp.urlImageBlob} width={450} height={55}/>
+                        <img className="img-forma-pago" src={mp.urlImageBlob}/>
                     </div>
 
                 ))

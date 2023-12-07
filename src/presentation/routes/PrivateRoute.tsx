@@ -7,12 +7,12 @@ interface PrivateRouteProps {
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({children}) => {
-    const { userState } = useAuth();
+    const { loginState } = useAuth();
     const { pathname, search } = useLocation();
 
     localStorage.setItem('lastPath', pathname + search);
 
-    return userState.logged
+    return loginState.logged
         ? children
         : <Navigate to="/login" />
 }

@@ -11,7 +11,7 @@ export const HomeRoutes = () => {
 
             <div>
                 <Routes>
-                    <Route path="/" element={ <LayoutEvent /> } />
+                    <Route path="/*" element={ <LayoutEvent /> } />
                 </Routes>
             </div>
         </>

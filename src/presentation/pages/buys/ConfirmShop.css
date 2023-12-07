@@ -24,7 +24,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     background-color: white;
-    width: 90%;
 }
 
 #panel-shop-account {
@@ -32,9 +31,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     background-color: white;
-    width: 90%;
 }
 
-.list-event {
+/* .list-event {
     margin-left: -15px;
-}
+} */

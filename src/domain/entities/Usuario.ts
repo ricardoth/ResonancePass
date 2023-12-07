@@ -11,6 +11,7 @@ export interface Usuario {
     direccion: string;
     telefono: string;
     correo: string;
+    contrasena: string;
     activo: boolean;
     fechaCreacion: string;
     tipoUsuario: TipoUsuario | null;

@@ -8,9 +8,15 @@
     padding: 3px; 
     margin: 4px;
     padding-left: 10px;
+    width: auto;
 }
 
 .form-check-input {
     margin-right: 15px;
     margin-top: 15px !important;
+}
+
+.img-forma-pago {
+    width: 50%;
+    height: 100%;
 }

@@ -7,7 +7,7 @@ export const EventGetTicket: React.FC<EventoProps> = ({evento}) => {
     const navigate = useNavigate();
 
     const handleGetTicket = (eventDetails: Evento) => {
-        navigate('/carro',{
+        navigate('/login',{
             state: { eventDetails }
         });
     }

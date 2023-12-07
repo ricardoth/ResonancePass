@@ -1,6 +1,6 @@
 import { AuthAction, AuthState } from "../../entities/AuthState";
 
 export interface AuthContextProps {
-    userState: AuthState;
+    loginState: AuthState;
     dispatch: React.Dispatch<AuthAction>;
 }

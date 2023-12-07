@@ -9,13 +9,13 @@ const initialState: AuthState = {
     user: null
 };
 
-export const AuthContext = createContext<AuthContextProps>({userState: initialState, dispatch: () => null });
+export const AuthContext = createContext<AuthContextProps>({loginState: initialState, dispatch: () => null });
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
-    const [ userState, dispatch ] = useReducer(authReducer, initialState); 
+    const [ loginState, dispatch ] = useReducer(authReducer, initialState); 
 
     return (
-        <AuthContext.Provider value={{ userState, dispatch }}>
+        <AuthContext.Provider value={{ loginState, dispatch }}>
             {children}
         </AuthContext.Provider>
     );

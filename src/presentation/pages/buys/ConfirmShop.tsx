@@ -1,22 +1,41 @@
+import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom"
 import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatCurrency } from "../../../types/currency";
 import { formatDateHour } from '../../../utils/formatDateOption';
-import './ConfirmShop.css';
 import { WayToPay } from './WayToPay';
 import { BuyerData } from './BuyerData';
+import './ConfirmShop.css';
+import { useFormik } from 'formik';
 
 const CURRENCY_CLP = 'CLP';
 
 export const ConfirmShop = () => {
     const location = useLocation();
-    // const [ tickets, setTickets ] = useState(location.state?.ticketDetails);
-    // const [ total, setTotal ] = useState(location.state?.sumTotal);
-    // const [ eventDetails, setEventDetails ] = useState(location.state?.evento);
+    const [ radioValue, setRadioValue ] = useState(0);
 
     const tickets = location.state?.ticketDetails;
     const total: number = location.state?.sumTotal;
     const eventDetails = location.state?.evento;
+
+    useEffect(() => {
+        console.log(radioValue)
+    }, [radioValue]);
+
+    const formik = useFormik({
+        initialValues: {
+            idEvento: 0,
+            idSector: 0,
+            idUsuario: 0,
+            idMedioPago: 0,
+            
+        },
+        // validationSchema : validationSchema,
+        onSubmit: (values) => {
+            
+           console.log(values)
+        },
+    });
 
     return (
         <>
@@ -74,22 +93,34 @@ export const ConfirmShop = () => {
                 </article>
             </section>
 
-            <section className="section-buyer">
+            {/* <section className="section-buyer">
                 <article className="info-evento-container">
                     <div id='panel-form-buyer'>
                         <BuyerData />
                     </div>
                 </article>
-            </section>
+            </section> */}
 
             <section className="section-confirm-panel">
                 <article className="info-evento-container">
                     <div id="panel-shop-account">
-                        <WayToPay />
+                        <WayToPay radioValue={radioValue} setRadioValue={setRadioValue} />
                     </div>
+                    <hr/>
+
+                    <div className="container">
+                        <div className="row g-2">
+                            <div className="col-auto">
+                                <h6><strong>Total</strong></h6>
+                            </div>
+                            <div className="col-auto">
+                                <p><strong>{formatCurrency(total, CURRENCY_CLP)}</strong></p>
+                            </div>
+                            <button className="btn btn-warning">Generar Compra</button>
+                        </div>
+                    </div>    
                 </article>
             </section>
-
         </>
     )
 }
