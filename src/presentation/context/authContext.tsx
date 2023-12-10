@@ -10,7 +10,6 @@ const initialState: AuthState = {
 };
 
 const init = (): AuthState => {
-    //localStorage.clear();
     const storedData = localStorage.getItem('loginState');
     if (storedData) {
         try {
