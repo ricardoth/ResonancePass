@@ -12,10 +12,10 @@ export const NavbarEvent = () => {
 
     const handleLogout = () => {
         const logoutInfo: any = {
-            type: types.logout,
-            payload: null
+            type: types.logout
         };
         dispatchLoginState(logoutInfo);
+        localStorage.removeItem('loginState');
         navigate("/", {
             replace: true
         });

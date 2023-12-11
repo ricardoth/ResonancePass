@@ -12,10 +12,10 @@ export const Navbar = () => {
 
     const handleLogout = () => {
         const logoutInfo: any = {
-            type: types.logout,
-            payload: null
+            type: types.logout
         };
         dispatchLoginState(logoutInfo);
+        localStorage.removeItem('loginState');
         navigate("/", {
             replace: true
         });
@@ -48,7 +48,7 @@ export const Navbar = () => {
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark">
                                             <li><a className="dropdown-item" href="#">Mis Datos</a></li>
-                                            <li><a className="dropdown-item" href="#">Mis Tickets</a></li>
+                                            <Link className='dropdown-item' to={"/misTickets"}>Mis Tickets</Link>
                                             <Link className='dropdown-item' to={"/changePassword"}>Cambiar Contraseña</Link>
 
                                             <li><button className='nav-item dropdown-item' onClick={handleLogout}>Cerrar Sesión</button></li>
@@ -91,7 +91,7 @@ export const Navbar = () => {
                                         </li>
                                         <hr className='separator'/>
                                         <li><a className="nav-item text-white" href="#">Mis Datos</a></li>
-                                        <li><a className="nav-item text-white" href="#">Mis Tickets</a></li>
+                                        <li><Link className='nav-item text-white' to={"/misTickets"}>Mis Tickets</Link></li>
                                         <li>
                                             <Link className='nav-item text-white' to={"/changePassword"}>Cambiar Contraseña</Link>
                                         </li>

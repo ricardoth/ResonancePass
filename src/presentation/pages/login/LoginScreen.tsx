@@ -55,7 +55,7 @@ export const LoginScreen = () => {
                 });
                 let usuario = response.data.data;
                 setLoading(false);
-                //Envío a context
+                //Envío a context API
                 const basicInfoUser: any = {
                     type: types.login,
                     payload: usuario,
@@ -66,7 +66,6 @@ export const LoginScreen = () => {
                     user: usuario
                 }
                 dispatchLoginState(basicInfoUser);
-                // localStorage.setItem('user', JSON.stringify(basicInfoUser));
                 localStorage.setItem('loginState', JSON.stringify(loginInfo));
 
                 if (previousPath == '/' || previousPath == '') {
@@ -76,10 +75,11 @@ export const LoginScreen = () => {
                         state: [ eventDetails ]
                     });
                 }
-                
+                formik.resetForm();
             } catch (error: any) {
                 setLoading(false);
                 toast.error(error.response.data.Message);
+                formik.resetForm();
             }
         },
     });
@@ -105,7 +105,7 @@ export const LoginScreen = () => {
                                 className="form-control"
                                 value={formik.values.correo}
                                 onChange={formik.handleChange}
-                                // autoComplete='off'
+                                autoComplete='off'
                             />
 
                             {formik.touched.correo && formik.errors.correo ? (
