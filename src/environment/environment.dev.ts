@@ -15,5 +15,5 @@ export const environment = {
     UrlMedioPago: "https://api-decimatio-dev.azurewebsites.net/api/MedioPago",
     UrlUsuarios: "https://api-decimatio-dev.azurewebsites.net/api/Usuario",
     UrlGenerarTicket: "https://api-decimatio-dev.azurewebsites.net/api/Ticket/GenerarTickets",
-    UrlTickets: "https://api-decimatio-dev.azurewebsites.net/api/Ticket"
+    UrlTickets: "https://api-decimatio-dev.azurewebsites.net/api/Ticket",
 }

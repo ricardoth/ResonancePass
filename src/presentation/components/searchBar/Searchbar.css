@@ -1,5 +1,5 @@
 .input-icon-container {
-    position: relative;
+    position: flex; 
     display: inline-block;
 }
 
@@ -19,3 +19,4 @@
     justify-content: center;
     align-items: center;
 }
+
