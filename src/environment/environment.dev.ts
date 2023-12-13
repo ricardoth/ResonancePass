@@ -1,6 +1,8 @@
 export const environment = {
     //Configuraciones APP
     ID_APP: 99,
+    TipoUsuarioCliente: 2,
+    TipoUsuarioAdmin: 1,
 
     //Configuraciones Autenticación
     BasicAuthType: "Basic",

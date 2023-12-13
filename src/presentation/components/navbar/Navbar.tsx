@@ -37,7 +37,7 @@ export const Navbar = () => {
                         { !loginState.logged ? 
                             <div className="d-none d-lg-flex ms-auto">
                                 <Link className='btn btn-outline-light me-2' to={"/login"}>Ingresa</Link>
-                                <button className='btn btn-outline-light'>Registrate</button>
+                                <Link className='btn btn-outline-light ' to={"/registerPage"}>Registrate</Link>
                             </div> 
                             : 
                             <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -81,7 +81,7 @@ export const Navbar = () => {
                                         </li>
                                         <hr className='separator'/>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#">Registrate</a>
+                                            <Link className='nav-link' to={"/registerPage"}>Registrate</Link>
                                         </li>
                                     </>
                                     : 

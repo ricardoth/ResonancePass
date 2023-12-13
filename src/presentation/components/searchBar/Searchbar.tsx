@@ -82,7 +82,6 @@ export const Searchbar = () => {
                                                                 : "No hay opciones disponibles" }
                     />
                     
-                    <i className='bi bi-search icon'></i>
                 </div>
             </div>
         </>

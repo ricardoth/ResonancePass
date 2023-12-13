@@ -1,4 +1,4 @@
-import { useLocation, useNavigate  } from 'react-router-dom';
+import { Link, useLocation, useNavigate  } from 'react-router-dom';
 import { useFormik } from 'formik';
 import image from '../../../assets/images/logoimagen2.png';
 import { NavbarEvent } from '../../components/navbar/NavBarEvent';
@@ -129,8 +129,7 @@ export const LoginScreen = () => {
                                 ) : null}
                         </div>
                         <div className='register-login'>
-                            {/* <Link to={'/resetPassword'}>¿Olvidaste tu Contraseña?</Link> */}
-                            <a href='#'>¿No tienes cuenta? Registrate</a>
+                            <Link to={'/resetPassword'}>¿Olvidaste tu Contraseña?</Link>
                         </div>
                         <br/>
                         {

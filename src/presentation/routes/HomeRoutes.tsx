@@ -1,17 +1,18 @@
 import { Route, Routes } from "react-router-dom"
-import { Navbar } from "../components/navbar/Navbar"
 import { LayoutEvent } from "../pages/layoutEvents/LayoutEvent"
-import { CarouselEvent } from "../components/carouselEvent/CarouselEvent"
+import { EventScreen } from "../pages/event/EventScreen"
+import { RegisterPage } from "../pages/account/RegisterPage"
+import { ResetPassword } from "../pages/account/ResetPassword"
 
 export const HomeRoutes = () => {
     return (
         <>
-            <Navbar />
-            <CarouselEvent />
-
             <div>
                 <Routes>
                     <Route path="/*" element={ <LayoutEvent /> } />
+                    <Route path="/eventScreen" element={ <EventScreen /> } />
+                    <Route path="/registerPage" element={ <RegisterPage /> } />
+                    <Route path="/resetPassword" element={ <ResetPassword /> } />
                 </Routes>
             </div>
         </>

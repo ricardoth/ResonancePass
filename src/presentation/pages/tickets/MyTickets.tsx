@@ -4,7 +4,6 @@ import { basicAuth } from '../../../types/basicAuth';
 import axios from "axios";
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/authContext';
-import { Navbar } from '../../components/navbar/Navbar';
 import { toast } from 'react-toastify';
 import './MyTickets.css';
 import DataTable from 'react-data-table-component';
@@ -16,6 +15,7 @@ import { LoaderFullScreen } from '../../components/loader/LoaderFullScreen';
 import { Ticket } from '../../../domain/entities/Ticket';
 import { Meta } from '../../../domain/valueObjects/Meta';
 import { customPaginationOptions } from '../../../types/datatableConfig';
+import { NavbarEvent } from '../../components/navbar/NavBarEvent';
 
 const URL_GET_TICKETS = environment.UrlTickets;
 const URL_VIEW_PDF = environment.UrlTickets + "/GetTicketVoucherPDF";
@@ -53,7 +53,7 @@ export const MyTickets = () => {
         fetchTickets(page);
     }, [page]);
 
-    if ( meta === undefined || myTickets.length === 0) return <><Navbar /><LoaderFullScreen /></>;
+    if ( meta === undefined || myTickets.length === 0) return <><NavbarEvent /><LoaderFullScreen /></>;
 
     const viewPDFTicket = async (paramTicket: any) => {
         try {
@@ -120,7 +120,7 @@ export const MyTickets = () => {
 
     return (
         <>
-            <Navbar />
+            <NavbarEvent />
             <section className='container-my-tickets'>
                 <h3><strong>{loginState.user.nombres} {loginState.user.apellidoP} {loginState.user.apellidoM}</strong></h3>
                

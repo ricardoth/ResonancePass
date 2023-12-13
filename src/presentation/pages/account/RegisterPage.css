@@ -1,0 +1,11 @@
+.container-form-buyer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    margin-top: 0;
+    padding-bottom: 0;
+}

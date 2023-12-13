@@ -1,12 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import { EventFooter } from './EventFooter';
-import { NavbarEvent } from '../../components/navbar/NavBarEvent';
 import { formatDateLocaleString, getHourEvent } from '../../../utils/formatDateOption';
 import { Evento } from '../../../domain/entities/Evento';
 import { EventTablePrices } from './EventTablePrices';
 import { EventReferencialMap } from './EventReferencialMap';
 import { EventGetTicket } from './EventGetTicket';
 import './EventScreen.css';
+import { NavbarEvent } from '../../components/navbar/NavBarEvent';
 
 export const EventScreen = () => {
     const location = useLocation();
@@ -15,7 +15,7 @@ export const EventScreen = () => {
 
     return (
         <>
-            <NavbarEvent/>
+            <NavbarEvent />
             <section className='content-event-flyer animate__animated animate__fadeIn'>
                 <picture className='container-image'>
                     <img className='image-flyer' src={backgroundImage}/>

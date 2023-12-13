@@ -62,7 +62,7 @@ export const ConfirmShop = () => {
             if (response.status === 200) {
                 toast.success('Se han generado los tickets correctamente');
                 openPdfWindow(response.data);
-                //Redirección a mis tickets
+                
                 navigate('/misTickets', {
                     replace: true
                 })

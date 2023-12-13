@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { formatDateLocaleString } from '../../../utils/formatDateOption';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/footer/Footer';
+import { CarouselEvent } from '../../components/carouselEvent/CarouselEvent';
+import { Navbar } from '../../components/navbar/Navbar';
 
 const URL_GET_EVENTOS = environment.UrlEventos;
 const userBasicAuth = basicAuth.username;
@@ -49,6 +51,8 @@ export const LayoutEvent = () => {
     
     return (
         <>
+        <Navbar />
+        <CarouselEvent />
             <div className="flex-container">
             {
                 eventos.map((row: Evento) => (
