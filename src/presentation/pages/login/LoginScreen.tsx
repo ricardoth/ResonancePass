@@ -53,28 +53,33 @@ export const LoginScreen = () => {
                         Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
                     }
                 });
-                let usuario = response.data.data;
-                setLoading(false);
-                //Envío a context API
-                const basicInfoUser: any = {
-                    type: types.login,
-                    payload: usuario,
-                }
+                if(response.status === 200) {
+                    let usuario = response.data.data;
+                    setLoading(false);
+                    //Envío a context API
+                    const basicInfoUser: any = {
+                        type: types.login,
+                        payload: usuario,
+                    }
+    
+                    const loginInfo = {
+                        logged: true,
+                        user: usuario
+                    }
+                    dispatchLoginState(basicInfoUser);
+                    localStorage.setItem('loginState', JSON.stringify(loginInfo));
 
-                const loginInfo = {
-                    logged: true,
-                    user: usuario
-                }
-                dispatchLoginState(basicInfoUser);
-                localStorage.setItem('loginState', JSON.stringify(loginInfo));
-
-                if (previousPath == '/' || previousPath == '') {
-                    navigate('/');
+                    if (previousPath == '/' || previousPath == '' || eventDetails === undefined) {
+                        navigate('/');
+                    } else {
+                        navigate('/carro', {
+                            state: [ eventDetails ]
+                        });
+                    }
                 } else {
-                    navigate('/carro', {
-                        state: [ eventDetails ]
-                    });
+                    toast.error(response.data.Message);
                 }
+                
                 formik.resetForm();
             } catch (error: any) {
                 setLoading(false);

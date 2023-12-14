@@ -89,6 +89,7 @@ export const RegisterPage = () => {
                 direccion: values.direccion,
                 telefono: values.telefono,
                 correo: values.correo,
+                contrasena: values.contrasena,
                 activo: true
             }
 

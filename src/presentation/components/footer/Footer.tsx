@@ -6,8 +6,8 @@ export const Footer = () => {
         <footer className="footer-landing-container">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-9">
-                        <div className="row">
+                    <div className="col-lg-9 mt-5 mb-5">
+                        <div className="row ">
                             <div className="col-lg-4">
                                 <img src={resonanceImg}  width={100} alt="logo footer" className="float-left d-none d-sm-block" /> 
                                 <img src={resonanceImg}  width={100} alt="logo footer" className="float-left d-block d-sm-none" />
@@ -18,9 +18,7 @@ export const Footer = () => {
                                 <br />
                                 <a href='#' className="text-white">Quienes Somos</a>
                                 <br />
-                                <br />
                                 <a href='#' className="text-white">Contacto</a>
-                                <br />
                                 <br />
                                 <a href='#' className="text-white">Términos y Condiciones</a>
                             </div>
@@ -30,12 +28,11 @@ export const Footer = () => {
                                 <br />
                                 <a href='#' className="text-white">Crea tu Evento</a>
                                 <br />
-                                <br />
                                 <a href='#' className="text-white">Trabaja con Nosotros</a>
                             </div>
                         </div>
                     </div>
-                    <div className='col-lg-3'>
+                    <div className='col-lg-3 mt-5 mb-5'>
                         <div className='row'>
                             <div className='text-white'>
                                 <h6 className="text-white">REDES SOCIALES</h6>

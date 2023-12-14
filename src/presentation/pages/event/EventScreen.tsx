@@ -47,7 +47,6 @@ export const EventScreen = () => {
             <EventGetTicket evento={eventState} />
             <EventFooter evento={eventState} /> 
         </>
-        
     )
 }
 

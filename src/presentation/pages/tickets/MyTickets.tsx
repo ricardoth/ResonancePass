@@ -76,27 +76,33 @@ export const MyTickets = () => {
     const columns: any = [
         {
             name: 'N° Ticket',
-            selector: (row: Ticket) => row.idTicket
+            selector: (row: Ticket) => row.idTicket,
+            sortable: true
         },
         {
             name: 'Fecha Compra',
-            selector: (row: Ticket) => formatDateHour(row.fechaTicket)
+            selector: (row: Ticket) => formatDateHour(row.fechaTicket),
+            sortable: true
         },
         {
             name: 'Evento',
             selector: (row: Ticket) => row.evento?.nombreEvento,
+            sortable: true
         },
         {
             name: 'Sector',
             selector: (row: Ticket) => row.sector?.nombreSector,
+            sortable: true
         },
         {
             name: 'Medio Pago',
             selector: (row: Ticket) => row.medioPago?.descripcion,
+            sortable: true
         },
         {
             name: 'Total',
             selector: (row: Ticket) => formatCurrency(row.montoTotal, 'CLP'),
+            sortable: true
         },
         {
             name: "Acciones",

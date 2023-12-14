@@ -3,7 +3,6 @@ import { AppRouter } from "./presentation/routes/AppRouter";
 import { AuthProvider } from "./presentation/context/authContext";
 import { useEffect, useReducer } from "react";
 import { authReducer } from "./application/reducers/authReducer";
-// import { types } from "./types/types";
 
 const init = () => {
     //localStorage.clear();

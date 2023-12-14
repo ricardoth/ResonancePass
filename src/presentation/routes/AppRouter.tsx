@@ -8,6 +8,7 @@ import { PrivateRoute } from "./PrivateRoute"
 import { ChangePassword } from "../pages/account/ChangePassword"
 import { RouteHistoryProvider } from "../context/historyContext"
 import { MyTickets } from "../pages/tickets/MyTickets"
+import { MyData } from "../pages/account/MyData"
 
 export const AppRouter = () => {
     return (
@@ -64,6 +65,15 @@ export const AppRouter = () => {
                         element={
                             <PrivateRoute>
                                 <MyTickets />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route 
+                        path="/misDatos" 
+                        element={
+                            <PrivateRoute>
+                                <MyData />
                             </PrivateRoute>
                         }
                     />

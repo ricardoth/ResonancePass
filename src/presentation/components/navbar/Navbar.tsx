@@ -40,14 +40,14 @@ export const Navbar = () => {
                                 <Link className='btn btn-outline-light ' to={"/registerPage"}>Registrate</Link>
                             </div> 
                             : 
-                            <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                            <div className="d-lg-flex collapse navbar-collapse me-5" id="navbarNavDarkDropdown">
                                 <ul className="navbar-nav">
                                     <li className="nav-item dropdown">
                                         <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             <small>Hola, {loginState.user.nombres} {loginState.user.apellidoP}</small>
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark">
-                                            <li><a className="dropdown-item" href="#">Mis Datos</a></li>
+                                            <Link className='dropdown-item' to={"/misDatos"}>Mis Datos</Link>
                                             <Link className='dropdown-item' to={"/misTickets"}>Mis Tickets</Link>
                                             <Link className='dropdown-item' to={"/changePassword"}>Cambiar Contraseña</Link>
 
@@ -90,7 +90,7 @@ export const Navbar = () => {
                                             <small>Hola, {loginState.user.nombres} {loginState.user.apellidoP}</small>
                                         </li>
                                         <hr className='separator'/>
-                                        <li><a className="nav-item text-white" href="#">Mis Datos</a></li>
+                                        <li><Link className='nav-item text-white' to={"/misDatos"}>Mis Datos</Link></li>
                                         <li><Link className='nav-item text-white' to={"/misTickets"}>Mis Tickets</Link></li>
                                         <li>
                                             <Link className='nav-item text-white' to={"/changePassword"}>Cambiar Contraseña</Link>
