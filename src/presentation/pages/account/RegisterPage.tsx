@@ -18,19 +18,42 @@ const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
 
 const validationSchema = Yup.object({
-    rut: Yup.string().test(
-        'Rut Válido', 
-        'El Rut no es válido',
-        value => validarRutChileno(value)),
-    nombres: Yup.string().required('El Nombre es obligatorio').max(250, 'El Nombre debe tener como máximo 250 caractéres'),
-    apellidoP: Yup.string().required('El Apellido Paterno es obligatorio').max(100, 'El Apellido Paterno debe tener como máximo 100 caractéres'),
-    apellidoM: Yup.string().required('El Apellido Materno es obligatorio').max(100, 'El Apellido Materno debe tener como máximo 100 caractéres'),
-    direccion: Yup.string().required('La Dirección es obligatoria').max(250, 'La Dirección debe tener como máximo 250 caractéres'),
-    telefono: Yup.string().required('El Teléfono es obligatorio').max(20, 'El Teléfono debe tener como máximo 20 caractéres'),
-    correo: Yup.string()
-      .email('Debe ingresar un email válido')
-      .required('El Email es obligatorio').max(200, 'El Email debe tener como máximo 200 caractéres'),
-    contrasena: Yup.string().required('La Contraseña es obligatorio').max(500, 'La Contraseña debe tener como máximo 500 caractéres'),
+    rut: Yup
+        .string()
+        .test('Rut Válido', 'El Rut no es válido', value => validarRutChileno(value)),
+    nombres: Yup
+        .string()
+        .required('El Nombre es obligatorio')
+        .max(250, 'El Nombre debe tener como máximo 250 caractéres'),
+    apellidoP: Yup
+        .string()
+        .required('El Apellido Paterno es obligatorio')
+        .max(100, 'El Apellido Paterno debe tener como máximo 100 caractéres'),
+    apellidoM: Yup
+        .string()
+        .required('El Apellido Materno es obligatorio')
+        .max(100, 'El Apellido Materno debe tener como máximo 100 caractéres'),
+    direccion: Yup
+        .string()
+        .required('La Dirección es obligatoria')
+        .max(250, 'La Dirección debe tener como máximo 250 caractéres'),
+    telefono: Yup
+        .string()
+        .required('El Teléfono es obligatorio')
+        .max(20, 'El Teléfono debe tener como máximo 20 caractéres'),
+    correo: Yup
+        .string()
+        .email('Debe ingresar un email válido')
+        .required('El Email es obligatorio')
+        .max(200, 'El Email debe tener como máximo 200 caractéres'),
+    contrasena: Yup
+        .string()
+        .required('La Contraseña es obligatorio')
+        .min(6, 'La Contraseña debe tener un largo mayor a 6 caractéres')
+        .max(500, 'La Contraseña debe tener como máximo 500 caractéres')
+        .matches(/^(?=.*[a-z])/, 'La contraseña debe contener al menos una minúscula')
+        .matches(/^(?=.*[A-Z])/, 'La contraseña debe contener al menos una mayúscula')
+        .matches(/^(?=.*[0-9])/, 'La contraseña debe contener al menos un número')
 });
 
 export const RegisterPage = () => {
@@ -88,14 +111,7 @@ export const RegisterPage = () => {
                 } 
                 formik.resetForm();
             } catch (error: any) {
-                console.log(typeof(error.response.data))
-                if (error.response.data > 0) {
-                    console.log('validacion', error.response.data)
-                } else {
-                    console.log(error.response.data)
-                    toast.error(error.response.data.Message)
-                }
-                
+                toast.error(error.response.data.Message)
                 setLoading(false);
                 formik.resetForm();
             }
@@ -114,8 +130,8 @@ export const RegisterPage = () => {
                 loading ? <LoaderFullScreen /> : 
                 <div className='container-form-buyer'>
                     <form onSubmit={formik.handleSubmit}>
-                        <h5><strong>Datos Usuario</strong></h5>
-                        <div className="row">
+                        <h5><strong>¡Crea tu Cuenta Resonance Pass!</strong></h5>
+                        <div className="row mt-3">
                             <div className="col-lg-6">
                                 <label>RUT</label>
                                 <input 
@@ -151,7 +167,7 @@ export const RegisterPage = () => {
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className="row mt-2">
                             <div className="col-lg-6">
                                 <label>Apellido Paterno</label>
                                 <input 
@@ -184,7 +200,7 @@ export const RegisterPage = () => {
                                     ) : null}
                             </div>
                         </div>
-                        <div className="row">
+                        <div className="row mt-2">
                             <div className="col-lg-6">
                                 <label>Dirección</label>
                                 <input 
@@ -217,7 +233,7 @@ export const RegisterPage = () => {
                             </div>
                             
                         </div>
-                        <div className='row'>
+                        <div className='row mt-2'>
                             <div className="col-lg-6">
                                 <label>Correo</label>
                                 <input 
