@@ -145,6 +145,7 @@ export const RegisterPage = () => {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     maxLength={10}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.rut && formik.errors.rut ? (
@@ -161,6 +162,7 @@ export const RegisterPage = () => {
                                     className="form-control"
                                     value={formik.values.nombres}
                                     onChange={formik.handleChange}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.nombres && formik.errors.nombres ? (
@@ -179,6 +181,7 @@ export const RegisterPage = () => {
                                     className="form-control"
                                     value={formik.values.apellidoP}
                                     onChange={formik.handleChange}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.apellidoP && formik.errors.apellidoP ? (
@@ -195,6 +198,7 @@ export const RegisterPage = () => {
                                     className="form-control"
                                     value={formik.values.apellidoM}
                                     onChange={formik.handleChange}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.apellidoM && formik.errors.apellidoM ? (
@@ -212,6 +216,7 @@ export const RegisterPage = () => {
                                     className="form-control"
                                     value={formik.values.direccion}
                                     onChange={formik.handleChange}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.direccion && formik.errors.direccion ? (
@@ -227,6 +232,7 @@ export const RegisterPage = () => {
                                     className="form-control"
                                     value={formik.values.telefono}
                                     onChange={formik.handleChange}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.telefono && formik.errors.telefono ? (
@@ -245,6 +251,7 @@ export const RegisterPage = () => {
                                     className="form-control"
                                     value={formik.values.correo}
                                     onChange={formik.handleChange}
+                                    autoComplete='off'
                                 />
 
                                 {formik.touched.correo && formik.errors.correo ? (
@@ -262,6 +269,7 @@ export const RegisterPage = () => {
                                         className="form-control"
                                         value={formik.values.contrasena}
                                         onChange={formik.handleChange}
+                                        autoComplete='off'
                                     />
                                     {
                                         showContrasena ? <span className='input-group-text' onClick={() => handleShowContrasena(false)}><i className='bi bi-eye-fill'></i></span> :
