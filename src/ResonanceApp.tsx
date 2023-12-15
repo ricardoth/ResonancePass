@@ -7,7 +7,6 @@ import { authReducer } from "./application/reducers/authReducer";
 const init = () => {
     //localStorage.clear();
     let user;
-    // const userString = localStorage.getItem('user');
     const loginState = localStorage.getItem('loginState');
  
     try {

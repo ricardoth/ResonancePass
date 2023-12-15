@@ -55,19 +55,24 @@ export const LayoutEvent = () => {
         <CarouselEvent />
             <div className="flex-container">
             {
-                eventos.map((row: Evento) => (
-                    <div className="flex-items animate__animated animate__zoomIn" key={row.idEvento}>
-                        <div className="card" key={row.idEvento}>
-                            <img className='card-img-top image-flyer' src={row.contenidoFlyer}/>
-                            <div className="card-body">
-                                <h5 className="card-title"><strong>{row.nombreEvento}</strong></h5>
-                                <p className="card-text calendar"><i className='bi bi-calendar3'></i> {formatDateLocaleString(row.fecha)} </p>
-                                <p className='card-text'><i className='bi bi-geo-alt-fill'></i> {row.lugar?.nombreLugar}</p>
-                                <button className='btn btn-warning btn-lg' onClick={() => handleBuyTicket(row)}>Comprar Tickets</button>
+                eventos.map((row: Evento) => {
+                    const backgroundImage = `url('${row.contenidoFlyer} ')`;
+
+                    return (
+                        <div className="flex-items animate__animated animate__zoomIn" key={row.idEvento}>
+                            <div className='card' key={row.idEvento}>
+                                <div className='card-img-top image-flyer' style={{backgroundImage}}></div>
+
+                                <div className="card-body">
+                                    <h5 className="card-title"><strong>{row.nombreEvento}</strong></h5>
+                                    <p className="card-text calendar"><i className='bi bi-calendar3'></i> {formatDateLocaleString(row.fecha)} </p>
+                                    <p className='card-text'><i className='bi bi-geo-alt-fill'></i> {row.lugar?.nombreLugar}</p>
+                                    <button className='btn btn-warning btn-lg' onClick={() => handleBuyTicket(row)}>Comprar Tickets</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))
+                    )
+                })
             }
             </div>
             <br/>

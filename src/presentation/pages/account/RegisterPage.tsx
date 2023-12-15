@@ -102,13 +102,14 @@ export const RegisterPage = () => {
                 });
 
                 if(response.status === 200) {
-                    setLoading(false);
+                   
                     toast.success("Se ha agregado exitosamente el usuario");
                     setTimeout(() => {
                         navigate("/login", {
                             replace: true
                         });
                     }, 1000);
+                    setLoading(false);
                 } 
                 formik.resetForm();
             } catch (error: any) {
