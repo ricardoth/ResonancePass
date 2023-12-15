@@ -40,9 +40,9 @@ export const Navbar = () => {
                                 <Link className='btn btn-outline-light ' to={"/registerPage"}>Registrate</Link>
                             </div> 
                             : 
-                            <div className="d-lg-flex collapse navbar-collapse me-5" id="navbarNavDarkDropdown">
+                            <div className="d-lg-flex collapse navbar-collapse" id="navbarNavDarkDropdown">
                                 <ul className="navbar-nav">
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropstart">
                                         <button className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             <small>Hola, {loginState.user.nombres} {loginState.user.apellidoP}</small>
                                         </button>

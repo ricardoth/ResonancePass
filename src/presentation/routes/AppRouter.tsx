@@ -43,7 +43,7 @@ export const AppRouter = () => {
                     />
 
                     <Route
-                        path="/carro" 
+                        path="/carro/:eventName" 
                         element={
                             <PrivateRoute>
                                 <ShopTicket />
@@ -52,7 +52,7 @@ export const AppRouter = () => {
                     />
 
                     <Route
-                        path="/confirmShop" 
+                        path="/confirmShop/:eventName" 
                         element={
                             <PrivateRoute>
                                 <ConfirmShop />

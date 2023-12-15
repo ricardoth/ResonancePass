@@ -83,8 +83,9 @@ export const ChooseSector: React.FC<EventoProps> = ({evento}) => {
         });
 
         const sumTotal = ticketDetails.reduce((acc, objAct) => acc + objAct.cantidadValorTotal, 0);
-        
-        navigate('/confirmShop', {
+        const paramRoute = ticketDetails[0].evento.nombreEvento.toLocaleLowerCase().replace(/ /g, '-').replace('---', '-');
+
+        navigate(`/confirmShop/${paramRoute}` , {
             state: { ticketDetails, sumTotal, evento }
         });
     }

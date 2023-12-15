@@ -44,7 +44,8 @@ export const LayoutEvent = () => {
     }, []);
 
     const handleBuyTicket = (eventDetails: Evento) => {
-        navigate('/eventScreen', {
+        const paramRoute = eventDetails.nombreEvento.toLocaleLowerCase().replace(/ /g, '-').replace('---', '-');
+        navigate(`/eventos/${paramRoute}`, {
             state: { eventDetails }
         });
     }

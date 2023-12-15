@@ -10,7 +10,7 @@ export const HomeRoutes = () => {
             <div>
                 <Routes>
                     <Route path="/*" element={ <LayoutEvent /> } />
-                    <Route path="/eventScreen" element={ <EventScreen /> } />
+                    <Route path="/eventos/:eventName" element={ <EventScreen /> } />
                     <Route path="/registerPage" element={ <RegisterPage /> } />
                     <Route path="/resetPassword" element={ <ResetPassword /> } />
                 </Routes>

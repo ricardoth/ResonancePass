@@ -10,12 +10,13 @@ export const EventGetTicket: React.FC<EventoProps> = ({evento}) => {
     const { loginState } = useContext(AuthContext);
     
     const handleGetTicket = (eventDetails: Evento) => {
+        const paramRoute = eventDetails.nombreEvento.toLocaleLowerCase().replace(/ /g, '-').replace('---', '-');
         if (loginState.logged) {
-            navigate('/carro', {
+            navigate(`/carro/${paramRoute}`, {
                 state: [ eventDetails ]
             });
         } else {
-            navigate('/login',{
+            navigate('/login', {
                 state: { eventDetails }
             });
         }
