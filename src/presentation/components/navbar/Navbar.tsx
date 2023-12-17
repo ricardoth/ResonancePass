@@ -49,8 +49,6 @@ export const Navbar = () => {
                                         <ul className="dropdown-menu dropdown-menu-dark">
                                             <Link className='dropdown-item' to={"/misDatos"}>Mis Datos</Link>
                                             <Link className='dropdown-item' to={"/misTickets"}>Mis Tickets</Link>
-                                            <Link className='dropdown-item' to={"/changePassword"}>Cambiar Contraseña</Link>
-
                                             <li><button className='nav-item dropdown-item' onClick={handleLogout}>Cerrar Sesión</button></li>
                                         </ul>
                                     </li>
@@ -92,12 +90,7 @@ export const Navbar = () => {
                                         <hr className='separator'/>
                                         <li><Link className='nav-item text-white' to={"/misDatos"}>Mis Datos</Link></li>
                                         <li><Link className='nav-item text-white' to={"/misTickets"}>Mis Tickets</Link></li>
-                                        <li>
-                                            <Link className='nav-item text-white' to={"/changePassword"}>Cambiar Contraseña</Link>
-                                        </li>
-                                        <li>
-                                            <a className='nav-item text-white' onClick={handleLogout}>Cerrar Sesión</a>
-                                        </li>
+                                        <li><a className='nav-item text-white' onClick={handleLogout}>Cerrar Sesión</a></li>
                                     </>
                                 }
                             </ul>

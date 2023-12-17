@@ -68,14 +68,7 @@ export const LoginScreen = () => {
                     }
                     dispatchLoginState(basicInfoUser);
                     localStorage.setItem('loginState', JSON.stringify(loginInfo));
-
-                    if (previousPath == '/' || previousPath == '' || eventDetails === undefined) {
-                        navigate('/');
-                    } else {
-                        navigate('/carro', {
-                            state: [ eventDetails ]
-                        });
-                    }
+                    enterPathRoute();
                 } else {
                     toast.error(response.data.Message);
                 }
@@ -88,6 +81,18 @@ export const LoginScreen = () => {
             }
         },
     });
+
+    const enterPathRoute = () => {
+        const paramRoute = eventDetails !== undefined ? eventDetails.nombreEvento.toLocaleLowerCase().replace(/ /g, '-').replace('---', '-') : '';
+
+        if (previousPath === '/' || previousPath === '' || eventDetails === undefined ) {
+            navigate('/');
+        } else {
+            navigate(`/carro/${paramRoute}`, {
+                state: [ eventDetails ]
+            });
+        }
+    }
 
     return (
         <>

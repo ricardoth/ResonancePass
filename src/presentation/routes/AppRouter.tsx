@@ -5,10 +5,9 @@ import { HomeRoutes } from "./HomeRoutes"
 import { ShopTicket } from "../pages/buys/ShopTicket"
 import { ConfirmShop } from "../pages/buys/ConfirmShop"
 import { PrivateRoute } from "./PrivateRoute"
-import { ChangePassword } from "../pages/account/ChangePassword"
 import { RouteHistoryProvider } from "../context/historyContext"
 import { MyTickets } from "../pages/tickets/MyTickets"
-import { MyData } from "../pages/account/MyData"
+import { AccountTabs } from "../pages/account/AccountTabs"
 
 export const AppRouter = () => {
     return (
@@ -30,15 +29,6 @@ export const AppRouter = () => {
                             <PublicRoute>
                                 <HomeRoutes />
                             </PublicRoute>
-                        }
-                    />
-
-                    <Route 
-                        path="/changePassword"
-                        element={
-                            <PrivateRoute>
-                                <ChangePassword />
-                            </PrivateRoute>
                         }
                     />
 
@@ -73,7 +63,7 @@ export const AppRouter = () => {
                         path="/misDatos" 
                         element={
                             <PrivateRoute>
-                                <MyData />
+                                <AccountTabs />
                             </PrivateRoute>
                         }
                     />

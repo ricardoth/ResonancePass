@@ -16,6 +16,7 @@ export const environment = {
     UrlGetSectoresByEvento: "https://api-decimatio-dev.azurewebsites.net/api/Sector/GetSectoresByEvento/",
     UrlMedioPago: "https://api-decimatio-dev.azurewebsites.net/api/MedioPago",
     UrlUsuarios: "https://api-decimatio-dev.azurewebsites.net/api/Usuario",
+    // UrlUsuarios: "https://localhost:7100/api/Usuario",
     UrlGenerarTicket: "https://api-decimatio-dev.azurewebsites.net/api/Ticket/GenerarTickets",
     UrlTickets: "https://api-decimatio-dev.azurewebsites.net/api/Ticket",
 }
