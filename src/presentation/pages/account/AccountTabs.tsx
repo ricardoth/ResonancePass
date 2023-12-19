@@ -10,7 +10,6 @@ export const AccountTabs = () => {
     return (
         <>
             <NavbarEvent />
-
             <ul className="nav nav-tabs my-data-container">
                 <li className="nav-item">
                     <button 

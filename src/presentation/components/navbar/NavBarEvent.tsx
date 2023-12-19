@@ -44,7 +44,6 @@ export const NavbarEvent = () => {
                                         <ul className="dropdown-menu dropdown-menu-dark">
                                             <li><Link className='dropdown-item' to={"/misDatos"}>Mis Datos</Link></li>
                                             <li><Link className='dropdown-item' to={"/misTickets"}>Mis Tickets</Link></li>
-                                            <li><Link className='dropdown-item' to={"/changePassword"}>Cambiar Contraseña</Link></li>
                                             <li><a className="dropdown-item" onClick={handleLogout}>Cerrar Sesión</a></li>
                                         </ul>
                                     </li>

@@ -1,3 +1,25 @@
 .container-my-tickets {
-    margin: 15px 50px 0px 50px;
+    padding: 20px; 
+    margin: auto; 
+    max-width: 1200px;
 }
+
+@media (max-width: 768px) {
+    h3 {
+      font-size: 1.2em; 
+    }
+  
+    .container-my-tickets {
+      padding: 10px; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h3 {
+      font-size: 1em; 
+    }
+  
+    .container-my-tickets {
+      padding: 5px; 
+    }
+  }

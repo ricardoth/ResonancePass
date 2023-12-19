@@ -34,25 +34,27 @@ export const MyData = () => {
     const { loginState } = useContext(AuthContext); 
     const [ loading, setLoading ] = useState(false);
     const [ userData, setUserData ] = useState({
-        idUsuario: loginState.user.idUsuario,
-        idTipoUsuario: loginState.user.idTipoUsuario,
-        rut: loginState.user.rut,
-        dV: loginState.user.dv,
-        nombres: loginState.user.nombres,
-        apellidoP: loginState.user.apellidoP,
-        apellidoM: loginState.user.apellidoM,
+        idUsuario: 0,
+        idTipoUsuario: 0,
+        rut: '',
+        dV: '',
+        nombres: '',
+        apellidoP: '',
+        apellidoM: '',
         telefono: '',
         direccion: '',
         correo: '',
-        activo: loginState.user.activo
+        activo: true
     })
 
     useEffect(() => {
         fetchUsuario();
-        formik.setValues(userData);
-    }, [ , loading]);
-    
+    }, []);
 
+    useEffect(() => {
+        formik.setValues(userData);
+    }, [userData]);
+    
     const fetchUsuario = async () => {
         try {
             setLoading(true);
@@ -100,108 +102,104 @@ export const MyData = () => {
                     toast.success('Se han guardado los cambios correctamente');
                 }
                 setLoading(false);
-                formik.resetForm();
             } catch (error: any) {
                 toast.error(error.response.data.Message)
                 setLoading(false);
-                formik.resetForm();
             }
         }
     });
 
+    if ( loading ) return <Loader />;
+
     return (
         <>
-           {
-                loading ? <Loader /> : 
-                <section className="container-my-data">
-                    <h4><strong>Mi Cuenta</strong></h4>
-                    <p>Modifica tus datos de contacto</p>
+            <section className="container-my-data animate__animated animate__fadeIn">
+                <h4><strong>Mi Cuenta</strong></h4>
+                <p>Modifica tus datos de contacto</p>
+                <hr/>
+                <section className="container-form-my-data">
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <label>Nombre</label>
+                                <input 
+                                    type="text"
+                                    className="form-control"
+                                    value={`${loginState.user.nombres}`}
+                                    disabled
+                                />
+                            </div>
 
-                    <section className="container-form-my-data">
-                        <form onSubmit={formik.handleSubmit}>
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <label>Nombre</label>
-                                    <input 
-                                        type="text"
-                                        className="form-control"
-                                        value={`${loginState.user.nombres} ${loginState.user.apellidoP} ${loginState.user.apellidoM}`}
-                                        disabled
-                                    />
-                                </div>
-
-                                <div className="col-lg-6">
-                                    <label>Apellidos</label>
-                                    <input 
-                                        type="text"
-                                        className="form-control"
-                                        value={`${loginState.user.apellidoP} ${loginState.user.apellidoM}`}
-                                        disabled
-                                    />
-                                </div>
+                            <div className="col-lg-6">
+                                <label>Apellidos</label> 
+                                <input 
+                                    type="text"
+                                    className="form-control"
+                                    value={`${loginState.user.apellidoP} ${loginState.user.apellidoM}`}
+                                    disabled
+                                />
                             </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <label>Rut</label>
-                                    <input 
-                                        type="text"
-                                        className="form-control"
-                                        value={`${loginState.user.rut}-${loginState.user.dv}`}
-                                        disabled
-                                    />
-                                </div>
-                                <div className="col-lg-6">
-                                    <label>Teléfono</label>
-                                    <input 
-                                        type="text" 
-                                        name="telefono"
-                                        placeholder="Teléfono"
-                                        className="form-control"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.telefono}
-                                        autoComplete='off'
-                                    />
-                                </div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <label>Rut</label>
+                                <input 
+                                    type="text"
+                                    className="form-control"
+                                    value={`${loginState.user.rut}-${loginState.user.dv}`}
+                                    disabled
+                                />
                             </div>
-                            <br/>
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <label>Dirección</label>
-                                    <input 
-                                        type="text" 
-                                        name="direccion"
-                                        placeholder="Dirección"
-                                        className="form-control"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.direccion}
-                                        autoComplete='off'
-                                    />
-                                </div>
-                                <div className="col-lg-6">
-                                    <label>Correo</label> 
-                                    <input 
-                                        type="text" 
-                                        name="correo"
-                                        placeholder="Correo"
-                                        className="form-control"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.correo}
-                                        autoComplete='off'
-                                    />
-                                </div>
+                            <div className="col-lg-6">
+                                <label>Teléfono</label>
+                                <input 
+                                    type="text" 
+                                    name="telefono"
+                                    placeholder="Teléfono"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.telefono}
+                                    autoComplete='off'
+                                />
                             </div>
-                            <br/>
-                            <div className="row g-2">
-                                <button type="submit" className="btn btn-outline-warning">
-                                    Guardar Cambios <i className="bi bi-floppy-fill"></i>
-                                </button>
+                        </div>
+                        <br/>
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <label>Dirección</label>
+                                <input 
+                                    type="text" 
+                                    name="direccion"
+                                    placeholder="Dirección"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.direccion}
+                                    autoComplete='off'
+                                />
                             </div>
-                        </form>
-                    </section>
+                            <div className="col-lg-6">
+                                <label>Correo</label> 
+                                <input 
+                                    type="text" 
+                                    name="correo"
+                                    placeholder="Correo"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.correo}
+                                    autoComplete='off'
+                                />
+                            </div>
+                        </div>
+                        <br/>
+                        <div className="row g-2">
+                            <button type="submit" className="btn btn-outline-warning">
+                                Guardar Cambios <i className="bi bi-floppy-fill"></i>
+                            </button>
+                        </div>
+                    </form>
                 </section>
-           }
-            
+            </section>
         </>
     )
 }

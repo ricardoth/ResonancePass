@@ -27,12 +27,12 @@ export const MyTickets = () => {
     const { loginState } = useContext(AuthContext);
     const [ myTickets, setMyTickets] = useState([]);
     const [ meta, setMeta ] = useState<Meta>({} as Meta);
-    // const [ loading, setLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     const [ page, setPage ] = useState(1);
 
     const fetchTickets = async (page: number, row: number = 10) => {
         try {
-            // setLoading(true);
+            setLoading(true);
             let response = await axios.get(`${URL_GET_TICKETS}?PageSize=${row}&PageNumber=${page}&IdUsuario=${loginState.user.idUsuario}`, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
@@ -41,11 +41,10 @@ export const MyTickets = () => {
             let {data, meta} = response.data;
             setMyTickets(data);
             setMeta(meta);
-            // setLoading(false);
+            setLoading(false);
         } catch (error: any) {
-            console.log(error);
             toast.error(error.response.Message);
-            // setLoading(false);
+            setLoading(false);
         }
     }
 
@@ -53,11 +52,11 @@ export const MyTickets = () => {
         fetchTickets(page);
     }, [page]);
 
-    if ( meta === undefined || myTickets.length === 0) return <><NavbarEvent /><LoaderFullScreen /></>;
+    if ( loading ) return <><NavbarEvent /><LoaderFullScreen /></>;
 
-    const viewPDFTicket = async (paramTicket: any) => {
+    const viewPDFTicket = async (paramTicket: Ticket) => {
         try {
-            // setLoading(true);
+            setLoading(true);
             let response = await axios.get(URL_VIEW_PDF + `?idTicket=${paramTicket.idTicket}`, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
@@ -66,10 +65,10 @@ export const MyTickets = () => {
            
             let pdfData: TicketQR = response.data.data;
             openPdfWindow(pdfData.nombreTicketComprobante)
-            // setLoading(false);
+            setLoading(false);
         } catch (error: any) {
             toast.error(error.response.Message);
-            // setLoading(false);
+            setLoading(false);
         }
     }
 
@@ -127,7 +126,7 @@ export const MyTickets = () => {
     return (
         <>
             <NavbarEvent />
-            <section className='container-my-tickets'>
+            <section className='container-my-tickets animate__animated animate__fadeIn'>
                 <h3><strong>{loginState.user.nombres} {loginState.user.apellidoP} {loginState.user.apellidoM}</strong></h3>
                
                 <DataTable 
