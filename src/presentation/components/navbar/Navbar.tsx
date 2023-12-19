@@ -2,13 +2,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import resonanceImg from '../../../assets/images/resonancePassBGWhite.png';
 import { Searchbar } from '../searchBar/Searchbar';
 import './Navbar.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { types } from '../../../types/types';
 
 export const Navbar = () => {
     const { loginState, dispatchLoginState } = useContext(AuthContext);
     const navigate = useNavigate();
+    const topRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        topRef.current?.scrollIntoView();
+    }, []);
 
     const handleLogout = () => {
         const logoutInfo: any = {
@@ -23,7 +28,7 @@ export const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav ref={topRef} className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to={"/"}>
                         <img src={resonanceImg} width={100} alt="Logo" />

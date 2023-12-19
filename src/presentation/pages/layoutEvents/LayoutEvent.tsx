@@ -10,8 +10,12 @@ import { useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/footer/Footer';
 import { CarouselEvent } from '../../components/carouselEvent/CarouselEvent';
 import { Navbar } from '../../components/navbar/Navbar';
+import { toast } from 'react-toastify';
+import { Meta } from '../../../domain/valueObjects/Meta';
+import { Loader } from '../../components/loader/Loader';
+import { LoaderFullScreen } from '../../components/loader/LoaderFullScreen';
 
-const URL_GET_EVENTOS = environment.UrlEventos;
+const URL_GET_EVENTOS = environment.UrlEventos + "/GetEventosPagination";
 const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
 
@@ -19,35 +23,61 @@ export const LayoutEvent = () => {
     const navigate = useNavigate();
     const [ eventos, setEventos] = useState([]);
     const [ loading, setLoading ] = useState(false);
+    const [ page, setPage ] = useState(1);
+    const [ meta, setMeta ] = useState<Meta>({} as Meta);
+    const totalPages = [];
 
-    const fetchEventos = async () => {
+    const fetchEventos = async (page: number, row: number = 9) => {
         try {
             setLoading(true);
-            let response = await axios.get(URL_GET_EVENTOS, {
+            let response = await axios.get(`${URL_GET_EVENTOS}?PageSize=${row}&PageNumber=${page}`, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
                 }
-            });
-            let {data} = response.data;
-            let datos = data;
-            let eventosActivos = datos.filter((ev: Evento) => ev.activo === true);
-            setEventos(eventosActivos);
+            })
+
+            if(response.status === 200) {
+                let {data, meta} = response.data;
+                setEventos(data);
+                setMeta(meta);
+               
+            } else {
+                toast.error("Ha ocurrido un error");
+            }
             setLoading(false);
         } catch (error) {
             console.log(error);
             setLoading(false);
+            toast.error("Ha ocurrido un error");
         }
     }
 
     useEffect(() => {
-        fetchEventos();
-    }, []);
+        fetchEventos(page);
+    }, [page]);
+
+    if ( loading ) return <><Navbar/><LoaderFullScreen /></>;
 
     const handleBuyTicket = (eventDetails: Evento) => {
         const paramRoute = eventDetails.nombreEvento.toLocaleLowerCase().replace(/ /g, '-').replace('---', '-');
         navigate(`/eventos/${paramRoute}`, {
             state: { eventDetails }
         });
+    }
+
+    const handlePageChange = (page: number) => {
+        window.scroll(0, 0);
+        setPage(page);
+    }
+
+    for (let i = 1; i <= meta.totalPages; i++) {
+        totalPages.push(
+            <div key={i}>
+                <li className="page-item">
+                    <button className='btn btn-warning' onClick={() => handlePageChange(i)}>{i}</button>&nbsp;
+                </li>
+            </div>
+        );
     }
     
     return (
@@ -76,6 +106,18 @@ export const LayoutEvent = () => {
                 })
             }
             </div>
+            <br/>
+            <section className='pagination-layout-events'>
+                <nav>
+                    <ul className="pagination pagination-lg justify-content-center">
+                        {
+                            meta.totalPages === 0 ? '' :
+                            totalPages
+                        }
+                    </ul>
+                </nav>
+            </section>
+            
             <br/>
             {
                 !loading && (

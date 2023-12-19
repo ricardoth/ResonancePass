@@ -53,7 +53,9 @@ export const Searchbar = () => {
         if(valueEvent !== null) {
             setEventSelected(valueEvent.value);
             let eventDetails: Evento = valueEvent.evento;
-            navigate('/eventScreen', {
+            const paramRoute = eventDetails.nombreEvento.toLocaleLowerCase().replace(/ /g, '-').replace('---', '-');
+
+            navigate(`/eventos/${paramRoute}`, {
                 state: { eventDetails }
             });
         } else {

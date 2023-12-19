@@ -19,10 +19,10 @@ export const CarouselEvent = () => {
     const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
-        fetchEventos();
+        fetchEventosCarrousel();
     }, [])
     
-    const fetchEventos = async () => {
+    const fetchEventosCarrousel = async () => {
         try {
             setLoading(true);
             let response = await axios.get(URL_GET_EVENTOS, {
