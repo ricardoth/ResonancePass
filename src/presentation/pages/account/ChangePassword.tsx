@@ -1,12 +1,11 @@
 import axios from "axios";
-import { replace, useFormik } from "formik";
+import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 import { environment } from "../../../environment/environment.dev";
 import { basicAuth } from "../../../types/basicAuth";
 import { AuthContext } from "../../context/authContext";
 import { Buffer } from 'buffer';
 import * as Yup from 'yup';
-import { LoaderFullScreen } from "../../components/loader/LoaderFullScreen";
 import { toast } from "react-toastify";
 import { Loader } from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";

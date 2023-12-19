@@ -12,7 +12,6 @@ import { CarouselEvent } from '../../components/carouselEvent/CarouselEvent';
 import { Navbar } from '../../components/navbar/Navbar';
 import { toast } from 'react-toastify';
 import { Meta } from '../../../domain/valueObjects/Meta';
-import { Loader } from '../../components/loader/Loader';
 import { LoaderFullScreen } from '../../components/loader/LoaderFullScreen';
 
 const URL_GET_EVENTOS = environment.UrlEventos + "/GetEventosPagination";
