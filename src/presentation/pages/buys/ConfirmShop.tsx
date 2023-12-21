@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom"
 import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatCurrency } from "../../../types/currency";
@@ -13,11 +13,15 @@ import { basicAuth } from '../../../types/basicAuth';
 import { toast } from 'react-toastify';
 import { openPdfWindow } from '../../../utils/pdfBlobOption';
 import { Loader } from '../../components/loader/Loader';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
 const CURRENCY_CLP = 'CLP';
 const URL_GENERAR_TICKETS = environment.UrlGenerarTicket;
+const URL_GENERAR_PAGO = environment.UrlMercadoPago + "/CrearPreferencia"
 const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
+const PUBLIC_KEY_MP = environment.PUBLIC_KEY_MERCADO_PAGO;
+
 
 export const ConfirmShop = () => {
     const { loginState } = useContext(AuthContext);
@@ -25,11 +29,22 @@ export const ConfirmShop = () => {
     const navigate = useNavigate();
     const [ radioValue, setRadioValue ] = useState(0);
     const [ loading, setLoading ] = useState(false);
+    const [ preferenceId, setPreferenceId ] = useState('');
 
     const tickets = location.state?.ticketDetails;
     const total: number = location.state?.sumTotal;
     const eventDetails = location.state?.evento;
 
+    initMercadoPago('TEST-e55d0def-a456-46b4-9c21-25454bf74ec0');
+
+    useEffect(() => {
+        if(radioValue === 5) {
+            handleBuyTicketMercadoPago();
+        }
+        if (radioValue !== 5)
+            setPreferenceId('');
+    }, [radioValue])
+    
     const handleGenerateTickets = async () => {
         let ticketList: any[] = [];
         let fecha = new Date();
@@ -48,9 +63,7 @@ export const ConfirmShop = () => {
                 ticketList.push(obj);
             }
         });
-
-        /** AQUI SE DEBE REDIRIGIR A PLATAFORMAS DE PAGO WEBPAY, MERCADO PAGO, ETC -- O BIEN DESDE LA API AL MOMENTO DE GENERAR, INTEGRAR PLATAFORMA DE PAGO */
-
+       
         try {
             setLoading(true);
             let response = await axios.post(URL_GENERAR_TICKETS, ticketList, {
@@ -75,6 +88,34 @@ export const ConfirmShop = () => {
             toast.error(error.response.data.Message);
             setRadioValue(0);
             setLoading(false);
+        }
+    }
+
+    const handleBuyTicketMercadoPago = async () => {
+        const id = await createPreference();
+        if(id)
+            setPreferenceId(id);
+    }
+
+    const createPreference = async () => {
+        try {
+            let values = {
+                description: `${eventDetails.nombreEvento}`,
+                price: total,
+                quantity: 1, 
+            };
+            let response = await axios.post(URL_GENERAR_PAGO, values, {
+                headers: {
+                    Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
+               }
+            });
+            console.log(response)
+            const {id} = response.data;
+            return id;
+            
+        } catch (error: any) {
+            console.log(error);
+            toast.error("No se pudo generar el pago, por favor intente nuevamente o elija otro medio de pago");
         }
     }
 
@@ -152,12 +193,20 @@ export const ConfirmShop = () => {
                                 <div className="col-auto">
                                     <p><strong>{formatCurrency(total, CURRENCY_CLP)}</strong></p>
                                 </div>
-                                <button type='button' className="btn btn-warning" onClick={handleGenerateTickets} disabled={radioValue <= 0}>Generar Compra</button>
+                                {/* <button type='button' className="btn btn-warning" onClick={handleGenerateTickets} disabled={radioValue <= 0}>Generar Compra</button> */}
+                                {
+                                    preferenceId && <Wallet initialization={{ preferenceId }} />
+                                }
                             </div>
                         </div>    
                     </>
                 }
+
+               
                 </article>
+                
+               
+
             </section>
                 
         </>

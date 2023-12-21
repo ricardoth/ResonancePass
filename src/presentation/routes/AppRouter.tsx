@@ -8,6 +8,8 @@ import { PrivateRoute } from "./PrivateRoute"
 import { RouteHistoryProvider } from "../context/historyContext"
 import { MyTickets } from "../pages/tickets/MyTickets"
 import { AccountTabs } from "../pages/account/AccountTabs"
+import { SuccessShop } from "../pages/responseShop/SuccessShop"
+import { FailureShop } from "../pages/responseShop/FailureShop"
 
 export const AppRouter = () => {
     return (
@@ -64,6 +66,24 @@ export const AppRouter = () => {
                         element={
                             <PrivateRoute>
                                 <AccountTabs />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route 
+                        path="/successShop" 
+                        element={
+                            <PrivateRoute>
+                                <SuccessShop />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route 
+                        path="/failureShop" 
+                        element={
+                            <PrivateRoute>
+                                <FailureShop />
                             </PrivateRoute>
                         }
                     />

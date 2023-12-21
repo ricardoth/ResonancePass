@@ -4,6 +4,9 @@ export const environment = {
     TipoUsuarioCliente: 2,
     TipoUsuarioAdmin: 1,
 
+    //MercadoPago Configs
+    PUBLIC_KEY_MERCADO_PAGO: "TEST-e55d0def-a456-46b4-9c21-25454bf74ec0",
+
     //Configuraciones Autenticación
     BasicAuthType: "Basic",
     JWTAuthType: "Bearer",
@@ -19,4 +22,5 @@ export const environment = {
     // UrlUsuarios: "https://localhost:7100/api/Usuario",
     UrlGenerarTicket: "https://api-decimatio-dev.azurewebsites.net/api/Ticket/GenerarTickets",
     UrlTickets: "https://api-decimatio-dev.azurewebsites.net/api/Ticket",
+    UrlMercadoPago: "https://api-decimatio-dev.azurewebsites.net/api/MercadoPago"
 }

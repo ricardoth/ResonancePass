@@ -61,6 +61,7 @@ export const WayToPay: React.FC<WayPayRadioProps> = ({radioValue, setRadioValue}
 
                 ))
             }
+
         </div>
     )
 }
