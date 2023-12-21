@@ -3,6 +3,7 @@ import { AppRouter } from "./presentation/routes/AppRouter";
 import { AuthProvider } from "./presentation/context/authContext";
 import { useEffect, useReducer } from "react";
 import { authReducer } from "./application/reducers/authReducer";
+import { TicketProvider } from "./presentation/context/ticketContext";
 
 const init = () => {
     //localStorage.clear();
@@ -37,7 +38,9 @@ function ResonanceApp() {
     return (
         <>
             <AuthProvider>
-                <AppRouter />
+                <TicketProvider>
+                    <AppRouter />
+                </TicketProvider>
             </AuthProvider>
             
             <ToastContainer

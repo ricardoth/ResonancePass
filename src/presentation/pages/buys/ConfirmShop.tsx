@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { NavbarEvent } from "../../components/navbar/NavBarEvent";
 import { formatCurrency } from "../../../types/currency";
 import { formatDateHour } from '../../../utils/formatDateOption';
@@ -11,12 +11,11 @@ import { environment } from '../../../environment/environment.dev';
 import { Buffer } from 'buffer';
 import { basicAuth } from '../../../types/basicAuth';
 import { toast } from 'react-toastify';
-import { openPdfWindow } from '../../../utils/pdfBlobOption';
 import { Loader } from '../../components/loader/Loader';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
 const CURRENCY_CLP = 'CLP';
-const URL_GENERAR_TICKETS = environment.UrlGenerarTicket;
+// const URL_GENERAR_TICKETS = environment.UrlGenerarTicket;
 const URL_GENERAR_PAGO = environment.UrlMercadoPago + "/CrearPreferencia"
 const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
@@ -26,7 +25,7 @@ const PUBLIC_KEY_MP = environment.PUBLIC_KEY_MERCADO_PAGO;
 export const ConfirmShop = () => {
     const { loginState } = useContext(AuthContext);
     const location = useLocation();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [ radioValue, setRadioValue ] = useState(0);
     const [ loading, setLoading ] = useState(false);
     const [ preferenceId, setPreferenceId ] = useState('');
@@ -35,7 +34,7 @@ export const ConfirmShop = () => {
     const total: number = location.state?.sumTotal;
     const eventDetails = location.state?.evento;
 
-    initMercadoPago('TEST-e55d0def-a456-46b4-9c21-25454bf74ec0');
+    initMercadoPago(PUBLIC_KEY_MP);
 
     useEffect(() => {
         if(radioValue === 5) {
@@ -45,51 +44,51 @@ export const ConfirmShop = () => {
             setPreferenceId('');
     }, [radioValue])
     
-    const handleGenerateTickets = async () => {
-        let ticketList: any[] = [];
-        let fecha = new Date();
+    // const handleGenerateTickets = async () => {
+    //     let ticketList: any[] = [];
+    //     let fecha = new Date();
 
-        tickets.map((t: any) => {
-            for (let index = 0; index < t.cantidad; index++) {
-                let obj: any = {};
-                obj.idUsuario = loginState.user.idUsuario;
-                obj.idEvento = eventDetails.idEvento;
-                obj.idSector = t.idSector;
-                obj.idMedioPago = radioValue;
-                obj.montoPago = t.precio;
-                obj.montoTotal = t.total;
-                obj.fechaTicket = fecha;
-                obj.activo = true;
-                ticketList.push(obj);
-            }
-        });
+    //     tickets.map((t: any) => {
+    //         for (let index = 0; index < t.cantidad; index++) {
+    //             let obj: any = {};
+    //             obj.idUsuario = loginState.user.idUsuario;
+    //             obj.idEvento = eventDetails.idEvento;
+    //             obj.idSector = t.idSector;
+    //             obj.idMedioPago = radioValue;
+    //             obj.montoPago = t.precio;
+    //             obj.montoTotal = t.total;
+    //             obj.fechaTicket = fecha;
+    //             obj.activo = true;
+    //             ticketList.push(obj);
+    //         }
+    //     });
        
-        try {
-            setLoading(true);
-            let response = await axios.post(URL_GENERAR_TICKETS, ticketList, {
-                headers: {
-                    Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
-                }
-            });
+    //     try {
+    //         setLoading(true);
+    //         let response = await axios.post(URL_GENERAR_TICKETS, ticketList, {
+    //             headers: {
+    //                 Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
+    //             }
+    //         });
 
-            if (response.status === 200) {
-                toast.success('Se han generado los tickets correctamente');
-                openPdfWindow(response.data);
+    //         if (response.status === 200) {
+    //             toast.success('Se han generado los tickets correctamente');
+    //             openPdfWindow(response.data);
                 
-                navigate('/misTickets', {
-                    replace: true
-                })
-            } else {
-                toast.error(response.data);
-            }
-            setRadioValue(0);
-            setLoading(false);
-        } catch (error: any) {
-            toast.error(error.response.data.Message);
-            setRadioValue(0);
-            setLoading(false);
-        }
-    }
+    //             navigate('/misTickets', {
+    //                 replace: true
+    //             })
+    //         } else {
+    //             toast.error(response.data);
+    //         }
+    //         setRadioValue(0);
+    //         setLoading(false);
+    //     } catch (error: any) {
+    //         toast.error(error.response.data.Message);
+    //         setRadioValue(0);
+    //         setLoading(false);
+    //     }
+    // }
 
     const handleBuyTicketMercadoPago = async () => {
         const id = await createPreference();
@@ -99,23 +98,47 @@ export const ConfirmShop = () => {
 
     const createPreference = async () => {
         try {
+
+            let ticketList: any[] = [];
+            let fecha = new Date();
+
+            tickets.map((t: any) => {
+                for (let index = 0; index < t.cantidad; index++) {
+                    let obj: any = {};
+                    obj.idUsuario = loginState.user.idUsuario;
+                    obj.idEvento = eventDetails.idEvento;
+                    obj.idSector = t.idSector;
+                    obj.idMedioPago = radioValue;
+                    obj.montoPago = t.precio;
+                    obj.montoTotal = t.total;
+                    obj.fechaTicket = fecha;
+                    obj.activo = true;
+                    ticketList.push(obj);
+                }
+            });
+
             let values = {
                 description: `${eventDetails.nombreEvento}`,
                 price: total,
                 quantity: 1, 
+                tickets: ticketList
             };
+
+            setLoading(true);
+
             let response = await axios.post(URL_GENERAR_PAGO, values, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
-               }
+                }
             });
-            console.log(response)
             const {id} = response.data;
+            setLoading(false);
             return id;
             
         } catch (error: any) {
             console.log(error);
             toast.error("No se pudo generar el pago, por favor intente nuevamente o elija otro medio de pago");
+            setLoading(false);
         }
     }
 

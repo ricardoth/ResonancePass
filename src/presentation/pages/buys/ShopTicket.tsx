@@ -8,7 +8,7 @@ import { Evento } from "../../../domain/entities/Evento";
 export const ShopTicket = () => {
     const location = useLocation();
     const eventState: Evento = location.state[0];
-
+    
     return (
         <>
             <NavbarEvent />

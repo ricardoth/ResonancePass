@@ -22,5 +22,7 @@ export const environment = {
     // UrlUsuarios: "https://localhost:7100/api/Usuario",
     UrlGenerarTicket: "https://api-decimatio-dev.azurewebsites.net/api/Ticket/GenerarTickets",
     UrlTickets: "https://api-decimatio-dev.azurewebsites.net/api/Ticket",
-    UrlMercadoPago: "https://api-decimatio-dev.azurewebsites.net/api/MercadoPago"
+    // UrlTickets: "https://localhost:7100/api/Ticket",
+    UrlMercadoPago: "https://api-decimatio-dev.azurewebsites.net/api/MercadoPago",
+    // UrlMercadoPago: "https://localhost:7100/api/MercadoPago"
 }
