@@ -31,6 +31,7 @@ export const SuccessShop = () => {
 
     const [ tickets, setTickets] = useState([] as any);
     const [ loading, setLoading ] = useState(false);
+    const [ counterTimer, setCounterTimer ] = useState(10);
 
     const handleGenerateTickets = async () => {
         try {
@@ -99,6 +100,20 @@ export const SuccessShop = () => {
     }, []);
 
     useEffect(() => {
+        if (counterTimer === 0) {
+            handleNavigation();
+            return;
+        }
+
+        const timerId = setTimeout(() => {
+            setCounterTimer(counterTimer - 1);
+        }, 1000);
+
+        return () => clearTimeout(timerId);
+    }, [counterTimer, navigate])
+    
+
+    useEffect(() => {
         if(tickets.length > 0) 
             handleGenerateTickets();
     }, [tickets.length > 0])
@@ -106,9 +121,9 @@ export const SuccessShop = () => {
     if (loading || tickets.length === 0) return <><NavbarEvent/><LoaderFullScreen/></>
 
     const handleNavigation = () => {
-         navigate('/misTickets', {
-                replace: true
-            })
+        navigate('/misTickets', {
+            replace: true
+        });
     }
 
     return (
@@ -121,21 +136,29 @@ export const SuccessShop = () => {
                     </div>
                     <div className="receipt-body">
                         <p><strong>ID de Transacción:</strong> {paymentState}</p>
+                        <p><strong>Medio Pago:</strong> {tickets[0].medioPago.nombreMedioPago}</p>
                         <p><strong>Fecha:</strong> {formatDateHour(tickets[0].fechaTicket)}</p>
                         <p><strong>Nombre de Usuario:</strong> {loginState.user.nombres} {loginState.user.apellidoP} {loginState.user.apellidoM}</p>
-                        <p><strong>Detalles del Pago:</strong> {tickets[0].evento.nombreEvento}</p>
+                        <p><strong>Detalles del Pago:</strong></p>
                         <ul>
                             { 
                                 tickets.map((t: any) => {
-                                   return <li key={t.idPreference}> {t.sector.nombreSector} - {formatCurrency(t.montoTotal, 'CLP')}</li>
+                                   return <li key={t.idPreference}>
+                                        {t.evento.nombreEvento} - 
+                                        <strong> Sector:</strong> {t.sector.nombreSector} - 
+                                        <strong> Precio:</strong> {formatCurrency(t.montoTotal, 'CLP')}</li>
                                 })
                             }
                         </ul>
                         <p><strong>Total:</strong> { formatCurrency(tickets.reduce((acc: any, {montoTotal}: any) => acc + montoTotal, 0), 'CLP')}</p>
+                     
                     </div>
                     <div className="receipt-footer">
-                        <button type="button" className="btn btn-warning" onClick={handleNavigation}>Ir a Mis Tickets</button>
-                        <p>*En 5 segundos se redigirá automáticamente</p>
+                        <div className="d-grid gap-2">
+                            <button type="button" className="btn btn-warning" onClick={handleNavigation}>Ir a Mis Tickets</button>
+                            <p>*En {counterTimer} segundos se redigirá automáticamente</p>
+                        </div>
+                        
                     </div>
                 </div>
             </div> 

@@ -29,7 +29,8 @@ export const WayToPay: React.FC<WayPayRadioProps> = ({radioValue, setRadioValue}
                 }
             });
             let datos = data.data;
-            setMediosPagos(datos);
+            let medioPagoActivos = datos.filter((mp: any) => mp.activo === true);
+            setMediosPagos(medioPagoActivos);
             setLoading(false);
         } catch (error) {
             console.log(error)

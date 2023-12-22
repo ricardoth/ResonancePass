@@ -15,7 +15,6 @@ import { Loader } from '../../components/loader/Loader';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
 const CURRENCY_CLP = 'CLP';
-// const URL_GENERAR_TICKETS = environment.UrlGenerarTicket;
 const URL_GENERAR_PAGO = environment.UrlMercadoPago + "/CrearPreferencia"
 const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
@@ -25,9 +24,7 @@ const PUBLIC_KEY_MP = environment.PUBLIC_KEY_MERCADO_PAGO;
 export const ConfirmShop = () => {
     const { loginState } = useContext(AuthContext);
     const location = useLocation();
-    // const navigate = useNavigate();
     const [ radioValue, setRadioValue ] = useState(0);
-    const [ loading, setLoading ] = useState(false);
     const [ preferenceId, setPreferenceId ] = useState('');
 
     const tickets = location.state?.ticketDetails;
@@ -43,52 +40,6 @@ export const ConfirmShop = () => {
         if (radioValue !== 5)
             setPreferenceId('');
     }, [radioValue])
-    
-    // const handleGenerateTickets = async () => {
-    //     let ticketList: any[] = [];
-    //     let fecha = new Date();
-
-    //     tickets.map((t: any) => {
-    //         for (let index = 0; index < t.cantidad; index++) {
-    //             let obj: any = {};
-    //             obj.idUsuario = loginState.user.idUsuario;
-    //             obj.idEvento = eventDetails.idEvento;
-    //             obj.idSector = t.idSector;
-    //             obj.idMedioPago = radioValue;
-    //             obj.montoPago = t.precio;
-    //             obj.montoTotal = t.total;
-    //             obj.fechaTicket = fecha;
-    //             obj.activo = true;
-    //             ticketList.push(obj);
-    //         }
-    //     });
-       
-    //     try {
-    //         setLoading(true);
-    //         let response = await axios.post(URL_GENERAR_TICKETS, ticketList, {
-    //             headers: {
-    //                 Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
-    //             }
-    //         });
-
-    //         if (response.status === 200) {
-    //             toast.success('Se han generado los tickets correctamente');
-    //             openPdfWindow(response.data);
-                
-    //             navigate('/misTickets', {
-    //                 replace: true
-    //             })
-    //         } else {
-    //             toast.error(response.data);
-    //         }
-    //         setRadioValue(0);
-    //         setLoading(false);
-    //     } catch (error: any) {
-    //         toast.error(error.response.data.Message);
-    //         setRadioValue(0);
-    //         setLoading(false);
-    //     }
-    // }
 
     const handleBuyTicketMercadoPago = async () => {
         const id = await createPreference();
@@ -124,21 +75,17 @@ export const ConfirmShop = () => {
                 tickets: ticketList
             };
 
-            setLoading(true);
-
             let response = await axios.post(URL_GENERAR_PAGO, values, {
                 headers: {
                     Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
                 }
             });
             const {id} = response.data;
-            setLoading(false);
             return id;
             
         } catch (error: any) {
             console.log(error);
             toast.error("No se pudo generar el pago, por favor intente nuevamente o elija otro medio de pago");
-            setLoading(false);
         }
     }
 
@@ -200,35 +147,28 @@ export const ConfirmShop = () => {
 
             <section className="section-confirm-panel">
                 <article className="info-evento-container">
-                {
-                    loading ? <Loader /> :
-                    <>
-                        <div id="panel-shop-account">
-                            <WayToPay radioValue={radioValue} setRadioValue={setRadioValue} />
+                    <div id="panel-shop-account">
+                        <WayToPay radioValue={radioValue} setRadioValue={setRadioValue} />
+                    </div>
+
+                    <div className="panel-method-shop">
+                        <hr/> 
+                        <div className="row g-2">
+                            <div className="col-auto">
+                                <h6><strong>Total</strong></h6>
+                            </div>
+                            <div className="col-auto">
+                                <p><strong>{formatCurrency(total, CURRENCY_CLP)}</strong></p>
+                            </div>
                         </div>
 
-                        <div className="container">
-                            <hr/> 
-                            <div className="row g-2">
-                                <div className="col-auto">
-                                    <h6><strong>Total</strong></h6>
-                                </div>
-                                <div className="col-auto">
-                                    <p><strong>{formatCurrency(total, CURRENCY_CLP)}</strong></p>
-                                </div>
-                                {/* <button type='button' className="btn btn-warning" onClick={handleGenerateTickets} disabled={radioValue <= 0}>Generar Compra</button> */}
-                                {
-                                    preferenceId && <Wallet initialization={{ preferenceId }} />
-                                }
-                            </div>
-                        </div>    
-                    </>
-                }
-
-               
+                        {
+                            preferenceId && <Wallet locale='es-CL' initialization={{ preferenceId }} />
+                        }
+                    </div>    
+                    
+                    
                 </article>
-                
-               
 
             </section>
                 
