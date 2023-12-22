@@ -10,6 +10,7 @@ import { MyTickets } from "../pages/tickets/MyTickets"
 import { AccountTabs } from "../pages/account/AccountTabs"
 import { SuccessShop } from "../pages/responseShop/SuccessShop"
 import { FailureShop } from "../pages/responseShop/FailureShop"
+import { PendingShop } from "../pages/responseShop/PendingShop"
 
 export const AppRouter = () => {
     return (
@@ -84,6 +85,15 @@ export const AppRouter = () => {
                         element={
                             <PrivateRoute>
                                 <FailureShop />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route 
+                        path="/pendingShop" 
+                        element={
+                            <PrivateRoute>
+                                <PendingShop />
                             </PrivateRoute>
                         }
                     />

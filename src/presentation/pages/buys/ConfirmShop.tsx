@@ -11,7 +11,6 @@ import { environment } from '../../../environment/environment.dev';
 import { Buffer } from 'buffer';
 import { basicAuth } from '../../../types/basicAuth';
 import { toast } from 'react-toastify';
-import { Loader } from '../../components/loader/Loader';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
 const CURRENCY_CLP = 'CLP';
@@ -161,7 +160,6 @@ export const ConfirmShop = () => {
                                 <p><strong>{formatCurrency(total, CURRENCY_CLP)}</strong></p>
                             </div>
                         </div>
-
                         {
                             preferenceId && <Wallet locale='es-CL' initialization={{ preferenceId }} />
                         }
