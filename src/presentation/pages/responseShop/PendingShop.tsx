@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getDateNow } from "../../../utils/formatDateOption";
 import { NavbarEvent } from "../../components/navbar/NavBarEvent"
 import { useAuth } from "../../context/authContext";
+import './FailureShop';
 
 export const PendingShop = () => {
     const {loginState} = useAuth();
