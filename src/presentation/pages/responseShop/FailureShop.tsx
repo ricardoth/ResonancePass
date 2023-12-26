@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import { NavbarEvent } from "../../components/navbar/NavBarEvent"
 import { useAuth } from "../../context/authContext";
 import './FailureShop.css';
-import { useEffect } from "react";
 import { getDateNow } from "../../../utils/formatDateOption";
 
 export const FailureShop = () => {
