@@ -37,3 +37,14 @@ export const getHourEvent = (paramDate: string) => {
     const hourString = `${hour}:${minutesDate}`
     return hourString;
 }
+
+
+export const getDateNow = () => {
+    const date = new Date();
+    const yearDate = date.getFullYear();
+    const monthDate = (date.getMonth() + 1).toString().padStart(2, '0');
+    const dayDate = date.getDate().toString().padStart(2, '0');
+
+    const dateString = `${dayDate}-${monthDate}-${yearDate}`
+    return dateString;
+}

@@ -32,6 +32,7 @@ export const SuccessShop = () => {
     const [ tickets, setTickets] = useState([] as any);
     const [ loading, setLoading ] = useState(false);
     const [ counterTimer, setCounterTimer ] = useState(10);
+    const [ enComprobantePago, setEnComprobantePago ] = useState(true);
 
     const handleGenerateTickets = async () => {
         try {
@@ -59,14 +60,12 @@ export const SuccessShop = () => {
             if (response.status === 200) {
                 toast.success('Se han generado los tickets correctamente');
                 openPdfWindow(response.data);
-                
-             
             } else {
                 toast.error(response.data);
             }
             setLoading(false);
         } catch (error: any) {
-            console.log(error)
+            toast.error(error.response.data.Message);
             setLoading(false);
         }
     }
@@ -83,25 +82,59 @@ export const SuccessShop = () => {
             if (response.status === 200) {
                 const {data} = response.data;
                 setTickets(data);
-                console.log(data)
             } else {
                 toast.error("No se pudo generar la transacción y el pago, ha ocurrido un error, por favor contacte al Administrador");
             }
 
             setLoading(false);
         } catch (error: any) {
-            console.log(error)
+            toast.error(error.response.data.Message);
             setLoading(false);
         }
     }
 
+    const handleNavigation = () => {
+        navigate('/misTickets', {
+            replace: true
+        });
+    }
+
     useEffect(() => {
         handleGetTickets(transactionState);
-    }, []);
+
+        const handleBeforeUnload = (e: any) => {
+            if (enComprobantePago) {
+                e.preventDefault();
+                e.returnValue = ''; 
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [enComprobantePago]);
+
+    useEffect(() => {
+        const handleKeyPress = (e: any) => {
+            if (enComprobantePago && (e.keyCode === 116 || (e.metaKey && e.keyCode === 82))) {
+                e.preventDefault();
+                alert('La recarga de esta página no está permitida');
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [enComprobantePago]);
 
     useEffect(() => {
         if (counterTimer === 0) {
             handleNavigation();
+            setEnComprobantePago(false);
             return;
         }
 
@@ -110,8 +143,7 @@ export const SuccessShop = () => {
         }, 1000);
 
         return () => clearTimeout(timerId);
-    }, [counterTimer, navigate])
-    
+    }, [counterTimer, navigate]);
 
     useEffect(() => {
         if(tickets.length > 0) 
@@ -119,12 +151,6 @@ export const SuccessShop = () => {
     }, [tickets.length > 0])
 
     if (loading || tickets.length === 0) return <><NavbarEvent/><LoaderFullScreen/></>
-
-    const handleNavigation = () => {
-        navigate('/misTickets', {
-            replace: true
-        });
-    }
 
     return (
         <>
@@ -163,6 +189,5 @@ export const SuccessShop = () => {
                 </div>
             </div> 
         </>
-        
     )
 }
