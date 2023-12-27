@@ -34,7 +34,7 @@ export const EventScreen = () => {
                     <div className='info-observacion'>
                         <div className="col-lg-12 animate__animated animate__fadeInDown">
                             <h4 className="text-white text-center">{eventState.descripcion}</h4>
-                            <p className="text-white text-center">
+                            <p className="text-white text-center observacion">
                                 {eventState.observacion}
                             </p>
                         </div>
