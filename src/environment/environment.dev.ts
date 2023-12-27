@@ -12,7 +12,7 @@ export const environment = {
     //MercadoPago PROD REAL
     //PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
     //Mercado Pago Cuenta Mario
-    PUBLIC_KEY_MERCADO_PAGO: "TEST-420841ef-493a-48ee-8360-926ad46d962b",
+    PUBLIC_KEY_MERCADO_PAGO: "APP_USR-3e8da9b5-69c7-4991-99a7-f891f0a8564d",
 
     //Configuraciones Autenticación
     BasicAuthType: "Basic",
