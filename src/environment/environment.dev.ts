@@ -6,11 +6,11 @@ export const environment = {
 
     //MercadoPago Configs
     //TEST
-    PUBLIC_KEY_MERCADO_PAGO: "TEST-e55d0def-a456-46b4-9c21-25454bf74ec0",
+    //PUBLIC_KEY_MERCADO_PAGO: "TEST-e55d0def-a456-46b4-9c21-25454bf74ec0",
     //Cuenta de Prueba con credenciales de producción
     // PUBLIC_KEY_MERCADO_PAGO: "APP_USR-7538cf1c-bea3-4e39-b026-6a9f3ef6a660",
     //MercadoPago PROD REAL
-    // PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
+    PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
 
     //Configuraciones Autenticación
     BasicAuthType: "Basic",
