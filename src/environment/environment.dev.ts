@@ -10,7 +10,9 @@ export const environment = {
     //Cuenta de Prueba con credenciales de producción
     // PUBLIC_KEY_MERCADO_PAGO: "APP_USR-7538cf1c-bea3-4e39-b026-6a9f3ef6a660",
     //MercadoPago PROD REAL
-    PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
+    //PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
+    //Mercado Pago Cuenta Mario
+    PUBLIC_KEY_MERCADO_PAGO: "APP_USR-3e8da9b5-69c7-4991-99a7-f891f0a8564d",
 
     //Configuraciones Autenticación
     BasicAuthType: "Basic",
