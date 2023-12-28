@@ -14,6 +14,9 @@ export const environment = {
     //Mercado Pago Cuenta Mario
     PUBLIC_KEY_MERCADO_PAGO: "APP_USR-3e8da9b5-69c7-4991-99a7-f891f0a8564d",
 
+    //PayPal Configs
+    
+
     //Configuraciones Autenticación
     BasicAuthType: "Basic",
     JWTAuthType: "Bearer",
