@@ -15,7 +15,7 @@ export const environment = {
     PUBLIC_KEY_MERCADO_PAGO: "APP_USR-3e8da9b5-69c7-4991-99a7-f891f0a8564d",
 
     //PayPal Configs
-    
+    PUBLIC_KEY_PAYPAL: "AT4w7-G38w84HOFF_FrAMsfoM3_59X-730stJupYzgEaP0pAVyC7NZf8jh1OqaDu3CXKvJoGPoo6gf70",
 
     //Configuraciones Autenticación
     BasicAuthType: "Basic",
