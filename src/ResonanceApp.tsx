@@ -4,6 +4,8 @@ import { AuthProvider } from "./presentation/context/authContext";
 import { useEffect, useReducer } from "react";
 import { authReducer } from "./application/reducers/authReducer";
 import { TicketProvider } from "./presentation/context/ticketContext";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { environment } from "./environment/environment.dev";
 
 const init = () => {
     //localStorage.clear();
@@ -39,7 +41,13 @@ function ResonanceApp() {
         <>
             <AuthProvider>
                 <TicketProvider>
-                    <AppRouter />
+                    <PayPalScriptProvider 
+                    options={{
+                        clientId: environment.PUBLIC_KEY_PAYPAL,
+                        currency: 'CLP'
+                    }}>
+                        <AppRouter />
+                    </PayPalScriptProvider>
                 </TicketProvider>
             </AuthProvider>
             
@@ -52,9 +60,9 @@ function ResonanceApp() {
                 rtl={false}
                 pauseOnFocusLoss
                 draggable
-                theme="dark"
+                theme="light"
                 />
-            <ToastContainer />
+            {/* <ToastContainer /> */}
         </>
     )
 }

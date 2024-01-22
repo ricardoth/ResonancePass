@@ -12,6 +12,7 @@ import { Buffer } from 'buffer';
 import { basicAuth } from '../../../types/basicAuth';
 import { toast } from 'react-toastify';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { PayPalButton } from '../paypal/PayPalButton';
 
 const CURRENCY_CLP = 'CLP';
 const URL_GENERAR_PAGO = environment.UrlMercadoPago + "/CrearPreferencia"
@@ -19,12 +20,12 @@ const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
 const PUBLIC_KEY_MP = environment.PUBLIC_KEY_MERCADO_PAGO;
 
-
 export const ConfirmShop = () => {
     const { loginState } = useContext(AuthContext);
     const location = useLocation();
     const [ radioValue, setRadioValue ] = useState(0);
     const [ preferenceId, setPreferenceId ] = useState('');
+    const [ showPayPal, setShowPayPal ] = useState(false);
 
     const tickets = location.state?.ticketDetails;
     const total: number = location.state?.sumTotal;
@@ -38,6 +39,12 @@ export const ConfirmShop = () => {
         }
         if (radioValue !== 5)
             setPreferenceId('');
+
+        if (radioValue === 6) {
+            setPreferenceId('');
+            setShowPayPal(true);
+        }
+        
     }, [radioValue])
 
     const handleBuyTicketMercadoPago = async () => {
@@ -162,6 +169,10 @@ export const ConfirmShop = () => {
                         </div>
                         {
                             preferenceId && <Wallet locale='es-CL' initialization={{ preferenceId }} />
+                        }
+
+                        {
+                            showPayPal && <PayPalButton totalValue='10' invoice='Mi ticket' />
                         }
                     </div>    
                     
