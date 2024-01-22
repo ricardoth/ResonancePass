@@ -9,10 +9,10 @@ export const environment = {
     //PUBLIC_KEY_MERCADO_PAGO: "TEST-e55d0def-a456-46b4-9c21-25454bf74ec0",
     //Cuenta de Prueba con credenciales de producción
     // PUBLIC_KEY_MERCADO_PAGO: "APP_USR-7538cf1c-bea3-4e39-b026-6a9f3ef6a660",
-    //MercadoPago PROD REAL
-    //PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
+    //MercadoPago PROD REAL Richy
+    PUBLIC_KEY_MERCADO_PAGO: "APP_USR-34c88b58-6224-43eb-9ebb-935677bb6ab9",
     //Mercado Pago Cuenta Mario
-    PUBLIC_KEY_MERCADO_PAGO: "APP_USR-3e8da9b5-69c7-4991-99a7-f891f0a8564d",
+    // PUBLIC_KEY_MERCADO_PAGO: "APP_USR-3e8da9b5-69c7-4991-99a7-f891f0a8564d",
 
     //PayPal Configs
     PUBLIC_KEY_PAYPAL: "AT4w7-G38w84HOFF_FrAMsfoM3_59X-730stJupYzgEaP0pAVyC7NZf8jh1OqaDu3CXKvJoGPoo6gf70",

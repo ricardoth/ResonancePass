@@ -10,6 +10,7 @@ export const PayPalButton : React.FC<PayPalButtonInterface> = ({invoice, totalVa
     return (
         <PayPalButtons 
             createOrder={(data, actions) => {
+                console.log(data)
                 return actions.order.create({
                     purchase_units: [
                         {
@@ -23,6 +24,7 @@ export const PayPalButton : React.FC<PayPalButtonInterface> = ({invoice, totalVa
             }}
 
             onApprove={async (data, actions) => {
+                console.log(data)
                 const order = await actions.order?.capture();
                 console.log("order", order)
             }}
