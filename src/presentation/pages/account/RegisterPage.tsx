@@ -12,15 +12,16 @@ import './RegisterPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { LoaderFullScreen } from '../../components/loader/LoaderFullScreen';
+import { Switch } from '../../components/switch/Switch';
 
 const URL_USUARIOS = environment.UrlUsuarios;
 const userBasicAuth = basicAuth.username;
 const passBasicAuth = basicAuth.password;
 
 const validationSchema = Yup.object({
-    rut: Yup
-        .string()
-        .test('Rut Válido', 'El Rut no es válido', value => validarRutChileno(value)),
+    // rut: Yup
+    //     .string()
+    //     .test('Rut Válido', 'El Rut no es válido', value => validarRutChileno(value)),
     nombres: Yup
         .string()
         .required('El Nombre es obligatorio')
@@ -61,6 +62,8 @@ export const RegisterPage = () => {
     const [ showContrasena, setShowContrasena] = useState(false);
     const [ typeContrasena, setTypeContrasena ] = useState('password');
     const [ loading, setLoading ] = useState(false);
+    const [ isExtranjero, setIsExtranjero ] = useState(false);
+    const [ isVisibleRut, setIsVisibleRut ] = useState(true);
 
     const formik = useFormik<UsuarioFormsProps>({
         initialValues: {
@@ -71,13 +74,21 @@ export const RegisterPage = () => {
             direccion: '',
             telefono: '',
             correo: '',
-            contrasena: ''
+            contrasena: '',
         },
         validationSchema : validationSchema,
         onSubmit: async (values) => {
+            let rutNumber, dv;
+
+            if(!isExtranjero) {
+                if(!validarRutChileno(values.rut)) {
+                    toast.error("El Rut no es válido");
+                }
+            }
+
             let rutSplit = values.rut.split('-');
-            let rutNumber = rutSplit[0];
-            let dv = rutSplit[1];
+            // let rutNumber = rutSplit[0];
+            // let dv = rutSplit[1];
 
             let userDetails = {
                 rut: rutNumber,
@@ -90,7 +101,8 @@ export const RegisterPage = () => {
                 telefono: values.telefono,
                 correo: values.correo,
                 contrasena: values.contrasena,
-                activo: true
+                activo: true,
+                esExtranjero: isExtranjero
             }
 
             try {
@@ -125,6 +137,11 @@ export const RegisterPage = () => {
         boolContrasena ? setTypeContrasena('text') : setTypeContrasena('password');
     }
 
+    const handleChangeExtranjero = () => {
+        setIsExtranjero(!isExtranjero);
+        setIsVisibleRut(!isVisibleRut);
+    }
+
     return (
         <>
             <NavbarEvent />
@@ -133,25 +150,36 @@ export const RegisterPage = () => {
                 <div className='container-form-buyer'>
                     <form onSubmit={formik.handleSubmit}>
                         <h5><strong>¡Crea tu Cuenta Resonance Pass!</strong></h5>
-                        <div className="row mt-3">
-                            <div className="col-lg-6">
-                                <label>RUT</label>
-                                <input 
-                                    type="text"
-                                    name='rut'
-                                    placeholder="Formato: XXXXXXXX-X"
-                                    className="form-control"
-                                    value={formik.values.rut}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    maxLength={10}
-                                    autoComplete='off'
-                                />
+                        <label>¿Es Extranjero?</label>
+                        <Switch 
+                            id={"usuarioExtranjero"}
+                            isOn={isExtranjero}
+                            onToogle={handleChangeExtranjero}
+                        />
 
-                                {formik.touched.rut && formik.errors.rut ? (
-                                    <div style={{color:'red'}}>{formik.errors.rut}</div>
-                                    ) : null}
-                            </div>
+                        <div className="row mt-3">
+                            {
+                                isVisibleRut && (
+                                    <div className="col-lg-6">
+                                        <label>RUT</label>
+                                        <input 
+                                            type="text"
+                                            name='rut'
+                                            placeholder="Formato: XXXXXXXX-X"
+                                            className="form-control"
+                                            value={formik.values.rut}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            maxLength={10}
+                                            autoComplete='off'
+                                        />
+        
+                                        {formik.touched.rut && formik.errors.rut ? (
+                                            <div style={{color:'red'}}>{formik.errors.rut}</div>
+                                            ) : null}
+                                    </div>
+                                )
+                            }
 
                             <div className="col-lg-6">
                                 <label>Nombres</label>
