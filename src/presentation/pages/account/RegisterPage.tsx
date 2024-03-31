@@ -81,14 +81,16 @@ export const RegisterPage = () => {
             let rutNumber, dv;
 
             if(!isExtranjero) {
-                if(!validarRutChileno(values.rut)) {
+                if(!validarRutChileno(values.rut)) 
                     toast.error("El Rut no es válido");
-                }
+                
+                let rutSplit = values.rut.split('-');
+                rutNumber = rutSplit[0];
+                dv = rutSplit[1];
+            } else {
+                rutNumber = null;
+                dv = null;
             }
-
-            let rutSplit = values.rut.split('-');
-            // let rutNumber = rutSplit[0];
-            // let dv = rutSplit[1];
 
             let userDetails = {
                 rut: rutNumber,
@@ -112,6 +114,8 @@ export const RegisterPage = () => {
                         Authorization: `Basic ${Buffer.from(`${userBasicAuth}:${passBasicAuth}`).toString('base64')}`,
                     }
                 });
+
+                console.log(response)
 
                 if(response.status === 200) {
                    

@@ -44,7 +44,8 @@ export const MyData = () => {
         telefono: '',
         direccion: '',
         correo: '',
-        activo: true
+        activo: true,
+        esExtranjero: false
     })
 
     useEffect(() => {
@@ -86,7 +87,8 @@ export const MyData = () => {
             telefono: userData.telefono,
             direccion: userData.direccion,
             correo: userData.correo,
-            activo: userData.activo
+            activo: userData.activo,
+            esExtranjero: userData.esExtranjero
         }, 
         validationSchema: validationSchema,
         onSubmit: async (values) => {
@@ -142,15 +144,19 @@ export const MyData = () => {
                         </div>
                         <br/>
                         <div className="row">
-                            <div className="col-lg-6">
-                                <label>Rut</label>
-                                <input 
-                                    type="text"
-                                    className="form-control"
-                                    value={`${loginState.user.rut}-${loginState.user.dv}`}
-                                    disabled
-                                />
-                            </div>
+                            {
+                                !userData.esExtranjero && (
+                                    <div className="col-lg-6">
+                                        <label>Rut</label>
+                                        <input 
+                                            type="text"
+                                            className="form-control"
+                                            value={`${loginState.user.rut}-${loginState.user.dv}`}
+                                            disabled
+                                        />
+                                    </div>
+                                )
+                            }
                             <div className="col-lg-6">
                                 <label>Teléfono</label>
                                 <input 
